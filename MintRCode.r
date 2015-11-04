@@ -149,7 +149,7 @@ cat('\n==== ANOVA ====\n\n')
 print(anova(crs$glm, test="Chisq"))
 cat("\n")
 
-# Time taken: 8.18 secs
+# Time taken: 6.66 secs
 
 
 
