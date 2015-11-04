@@ -148,6 +148,121 @@ Test Results:
       Greater | Equal Var: 320.5513, Inf
       
       
+Summary of the Logistic Regression model (built using glm):
+
+Call:
+glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
+    data = crs$dataset[crs$train, c(crs$input, crs$target)])
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.4828  -0.3999  -0.3410  -0.2664   3.6912  
+
+Coefficients:
+                                      Estimate    Std. Error z value Pr(>|z|)
+(Intercept)                        9.618770138   2.699575207   3.563 0.000367
+Number_of_logins                  -0.005795558   0.000332419 -17.435  < 2e-16
+Offerid                           -0.000261012   0.000059891  -4.358 1.31e-05
+MerchantCapital One 360            0.162857108   0.208017815   0.783 0.433686
+MerchantChase                     -0.392051055   0.093382116  -4.198 2.69e-05
+MerchantChoose Energy              0.739526065   0.189946348   3.893 9.89e-05
+MerchantCiti                      -0.378188112   0.174371005  -2.169 0.030093
+Merchantctg.discovery.intuit.com   1.456741169   0.187810325   7.756 8.73e-15
+MerchantEfinancial                -1.283786827   0.719632599  -1.784 0.074432
+MerchantFidelity                  -0.212013631   0.113737771  -1.864 0.062314
+MerchantFutureAdvisor             -0.169284510   0.125401030  -1.350 0.177034
+MerchantInsWeb                    -1.804278760   0.580290785  -3.109 0.001876
+MerchantLending Club               0.635077407   0.107774429   5.893 3.80e-09
+MerchantLevanto                    0.490016848   0.219864542   2.229 0.025832
+MerchantMotif                    -12.311665203 624.193834200  -0.020 0.984263
+MerchantMotif Investing           -0.075424812   0.097766374  -0.771 0.440422
+MerchantPersonal Capital          -0.879732945   0.283537096  -3.103 0.001918
+MerchantProgressive               -0.205368587   0.212827669  -0.965 0.334569
+MerchantProgrexion                -0.831284165   0.243228438  -3.418 0.000632
+MerchantQuicken Loans             -0.813408731   0.235957838  -3.447 0.000566
+MerchantQuinstreet               -12.366184163 152.385274020  -0.081 0.935322
+MerchantRate Supermarket          -0.973040415   0.307575836  -3.164 0.001558
+MerchantRateSuperMarket.ca        16.639354593 262.476762103   0.063 0.949453
+MerchantScotiabank                 5.010248647   0.735573780   6.811 9.67e-12
+MerchantWealthfront               -0.235697725   0.175212538  -1.345 0.178557
+TNM_Monthly.Income                 0.000112539   0.000038890   2.894 0.003806
+TNM_Monthly.Spend                 -0.000225739   0.000054963  -4.107 4.01e-05
+TNM_Number.of.Bank.Accounts        0.030769494   0.039271113   0.784 0.433325
+TNM_Offer.time_stamp              -0.000019170   0.000006214  -3.085 0.002036
+                                    
+(Intercept)                      ***
+Number_of_logins                 ***
+Offerid                          ***
+MerchantCapital One 360             
+MerchantChase                    ***
+MerchantChoose Energy            ***
+MerchantCiti                     *  
+Merchantctg.discovery.intuit.com ***
+MerchantEfinancial               .  
+MerchantFidelity                 .  
+MerchantFutureAdvisor               
+MerchantInsWeb                   ** 
+MerchantLending Club             ***
+MerchantLevanto                  *  
+MerchantMotif                       
+MerchantMotif Investing             
+MerchantPersonal Capital         ** 
+MerchantProgressive                 
+MerchantProgrexion               ***
+MerchantQuicken Loans            ***
+MerchantQuinstreet                  
+MerchantRate Supermarket         ** 
+MerchantRateSuperMarket.ca          
+MerchantScotiabank               ***
+MerchantWealthfront                 
+TNM_Monthly.Income               ** 
+TNM_Monthly.Spend                ***
+TNM_Number.of.Bank.Accounts         
+TNM_Offer.time_stamp             ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 17506  on 35635  degrees of freedom
+Residual deviance: 16475  on 35607  degrees of freedom
+AIC: 16533
+
+Number of Fisher Scoring iterations: 13
+
+Log likelihood: -8237.253 (29 df)
+Null/Residual deviance difference: 1031.019 (28 df)
+Chi-square p-value: 0.00000000
+Pseudo R-Square (optimistic): 0.21045839
+
+==== ANOVA ====
+
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: R01_Event
+
+Terms added sequentially (first to last)
+
+
+                            Df Deviance Resid. Df Resid. Dev   Pr(>Chi)    
+NULL                                        35635      17506               
+Number_of_logins             1   390.28     35634      17115  < 2.2e-16 ***
+Offerid                      1    69.13     35633      17046  < 2.2e-16 ***
+Merchant                    22   535.32     35611      16511  < 2.2e-16 ***
+TNM_Monthly.Income           1     8.18     35610      16503   0.004233 ** 
+TNM_Monthly.Spend            1    18.00     35609      16485 0.00002214 ***
+TNM_Number.of.Bank.Accounts  1     0.58     35608      16484   0.447077    
+TNM_Offer.time_stamp         1     9.53     35607      16475   0.002023 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Time taken: 6.66 secs
+
+
+
+      
       
       
       
