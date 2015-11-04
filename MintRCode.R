@@ -95,7 +95,15 @@ if (scoring)
   crs$dataset[["R01_Event"]] <- (crs$dataset[["Event"]] - 1.000000)/abs(2.000000 - 1.000000)
 }
 
+# Perform Test 
 
+# Use the fBasics package for statistical tests.
+
+library(fBasics, quietly=TRUE)
+
+# Perform the test.
+
+ks2Test(na.omit(crs$dataset[crs$dataset[["R01_Event"]] == "0", "Offerid"]), na.omit(crs$dataset[crs$dataset[["R01_Event"]] == "1", "Offerid"]))
 
 
 # The following variable selections have been noted.
