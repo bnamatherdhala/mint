@@ -96,22 +96,22 @@ if (scoring)
 }
 
 
+
+
 # The following variable selections have been noted.
 
-crs$input <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Number_of_logins",
-     "Id", "Offerid", "Offer.time_stamp", "Merchant",
-     "TNM_Monthly.Income", "TNM_Monthly.Spend")
+crs$input <- c("Number_of_logins", "Offerid", "Merchant", "TNM_Monthly.Income",
+     "TNM_Monthly.Spend", "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
 
-crs$numeric <- c("Number_of_logins", "Id", "Offerid", "TNM_Monthly.Income",
-     "TNM_Monthly.Spend")
+crs$numeric <- c("Number_of_logins", "Offerid", "TNM_Monthly.Income", "TNM_Monthly.Spend",
+     "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
 
-crs$categoric <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Offer.time_stamp",
-     "Merchant")
+crs$categoric <- "Merchant"
 
 crs$target  <- "R01_Event"
 crs$risk    <- NULL
 crs$ident   <- NULL
-crs$ignore  <- c("Monthly.Spend", "Monthly.Income", "Event")
+crs$ignore  <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Id", "Offer.time_stamp", "Event")
 crs$weights <- NULL
 
 
