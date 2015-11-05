@@ -15,6 +15,7 @@ names(train)
 [11] "Merchant"  
 
 nobs <- nrow(mint) # 71272 observations 
+
 train = mint[sample(nrow(mint),1000),] # 1000 observations
 validate = mint[sample(nrow(mint),500),] # 5000 observations
 test = mint[sample(nrow(mint),300),] # 300 observations
