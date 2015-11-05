@@ -189,9 +189,6 @@ F-statistic: 178.7 on 3 and 39996 DF,  p-value: < 2.2e-16
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 
-> fit = lm(formula = Event ~ Number_of_logins * Offerid*Number.of.Bank.Accounts, data = train)
-> summary(fit)
-
 Call:
 lm(formula = Event ~ Number_of_logins * Offerid * Number.of.Bank.Accounts, 
     data = train)
@@ -201,24 +198,15 @@ Residuals:
 -0.28318 -0.07495 -0.06529 -0.04941  1.06633 
 
 Coefficients:
-                                                   Estimate Std. Error t value   
-(Intercept)                                       2.042e+00  9.256e-02  22.066
-Number_of_logins                                 -5.149e-03  6.602e-04  -7.800
-Offerid                                          -2.125e-05  2.080e-06 -10.216
-Number.of.Bank.Accounts                          -4.038e-01  8.550e-02  -4.723
-Number_of_logins:Offerid                          1.097e-07  1.480e-08   7.411
-Number_of_logins:Number.of.Bank.Accounts          3.109e-03  6.267e-04   4.961
-Offerid:Number.of.Bank.Accounts                   8.768e-06  1.921e-06   4.564
-Number_of_logins:Offerid:Number.of.Bank.Accounts -6.839e-08  1.406e-08  -4.866
-                                                 Pr(>|t|)    
-(Intercept)                                       < 2e-16 ***
-Number_of_logins                                 6.35e-15 ***
-Offerid                                           < 2e-16 ***
-Number.of.Bank.Accounts                          2.33e-06 ***
-Number_of_logins:Offerid                         1.28e-13 ***
-Number_of_logins:Number.of.Bank.Accounts         7.03e-07 ***
-Offerid:Number.of.Bank.Accounts                  5.02e-06 ***
-Number_of_logins:Offerid:Number.of.Bank.Accounts 1.15e-06 ***
+                                                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                                       2.042e+00  9.256e-02  22.066  < 2e-16 ***
+Number_of_logins                                 -5.149e-03  6.602e-04  -7.800 6.35e-15 ***
+Offerid                                          -2.125e-05  2.080e-06 -10.216  < 2e-16 ***
+Number.of.Bank.Accounts                          -4.038e-01  8.550e-02  -4.723 2.33e-06 ***
+Number_of_logins:Offerid                          1.097e-07  1.480e-08   7.411 1.28e-13 ***
+Number_of_logins:Number.of.Bank.Accounts          3.109e-03  6.267e-04   4.961 7.03e-07 ***
+Offerid:Number.of.Bank.Accounts                   8.768e-06  1.921e-06   4.564 5.02e-06 ***
+Number_of_logins:Offerid:Number.of.Bank.Accounts -6.839e-08  1.406e-08  -4.866 1.15e-06 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
@@ -226,6 +214,37 @@ Residual standard error: 0.2452 on 39992 degrees of freedom
 Multiple R-squared:  0.0131,    Adjusted R-squared:  0.01293 
 F-statistic: 75.85 on 7 and 39992 DF,  p-value: < 2.2e-16
 
+
+> confint(fit)
+                                                         2.5 %        97.5 %
+(Intercept)                                       1.861023e+00  2.223868e+00
+Number_of_logins                                 -6.443441e-03 -3.855424e-03
+Offerid                                          -2.532291e-05 -1.717037e-05
+Number.of.Bank.Accounts                          -5.713748e-01 -2.362279e-01
+Number_of_logins:Offerid                          8.068623e-08  1.387129e-07
+Number_of_logins:Number.of.Bank.Accounts          1.880821e-03  4.337335e-03
+Offerid:Number.of.Bank.Accounts                   5.003041e-06  1.253353e-05
+Number_of_logins:Offerid:Number.of.Bank.Accounts -9.593592e-08 -4.083838e-08
+
+ pred =   predict(fit, data.frame(Event = c(5,10)), interval = "confidence")
+Warning message:
+'newdata' had 2 rows but variables found have 40000 rows 
+> summary(pred)
+      fit              lwr              upr        
+ Min.   :0.8569   Min.   :0.7854   Min.   :0.9283  
+ 1st Qu.:1.0540   1st Qu.:1.0507   1st Qu.:1.0581  
+ Median :1.0673   Median :1.0639   Median :1.0708  
+ Mean   :1.0652   Mean   :1.0601   Mean   :1.0702  
+ 3rd Qu.:1.0762   3rd Qu.:1.0725   3rd Qu.:1.0799  
+ Max.   :1.2832   Max.   :1.2470   Max.   :1.3194  
+> head(pred)
+       fit      lwr      upr
+1 1.103901 1.098770 1.109032
+2 1.060669 1.054654 1.066684
+3 1.047889 1.044818 1.050960
+4 1.065479 1.062995 1.067964
+5 1.058924 1.056233 1.061615
+6 1.022904 1.011991 1.033818
 
 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     
