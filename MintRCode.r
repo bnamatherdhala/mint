@@ -147,6 +147,10 @@ weights <- NULL
 # Regression model 
 
 # Build a Regression model.
+fit = lm(formula = Event ~ Number_of_logins * Offerid*Number.of.Bank.Accounts, data = train)
+fit = lm(formula = Event ~ Number_of_logins * Offerid, data = train)
+
+
 
 fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
 
