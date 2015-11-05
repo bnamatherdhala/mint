@@ -67,6 +67,19 @@ summary(mint[train, c(input, risk, target)])
 
 library(corrplot, quietly=TRUE)
 
+#view the relations between response and predictors
+ plot(Event~Offerid,data = train)
+> plot(Event~.,data = train)
+> plot(Event~Number_of_logins,Offerid, data = train)
+Error in plot.xy(xy, type, ...) : invalid plot type
+> plot(Event~Number_of_logins, data = train)
+> names(train)
+ [1] "Userid"                  "Profile_creation_time"   "Number.of.Bank.Accounts" "Monthly.Spend"           "Monthly.Income"         
+ [6] "Number_of_logins"        "Id"                      "Offerid"                 "Offer.time_stamp"        "Event"                  
+[11] "Merchant"               
+> plot(Event~Monthly.Spend,data = train)
+
+
 # Correlations work for numeric variables only.
 
 cor <- cor(train[train, numeric], use="pairwise", method="pearson")
