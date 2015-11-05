@@ -150,6 +150,11 @@ weights <- NULL
 
 fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
 
+Call:
+lm(formula = Event ~ Number_of_logins * Offerid, data = train)
+
+
+
 glm <- glm(R01_Event ~ .,
     data=crs$dataset[crs$train, c(crs$input, crs$target)],
     family=binomial(link="logit"))
