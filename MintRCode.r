@@ -16,9 +16,9 @@ names(train)
 
 nobs <- nrow(mint) # 71272 observations 
 
-train = mint[sample(nrow(mint),1000),] # 1000 observations
-validate = mint[sample(nrow(mint),500),] # 5000 observations
-test = mint[sample(nrow(mint),300),] # 300 observations
+train = mint[sample(nrow(mint),40000),] # 40000 observations
+validate = mint[sample(nrow(mint),20000),] # 20000 observations
+test = mint[sample(nrow(mint),15000),] # 15000 observations
 
 # The 'Hmisc' package provides the 'describe' function.
 

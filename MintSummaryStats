@@ -147,6 +147,24 @@ Test Results:
          Less | Equal Var: -Inf, 401.0724
       Greater | Equal Var: 320.5513, Inf
       
+
+Call:
+lm(formula = Event ~ Number_of_logins, data = train)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.08618 -0.07986 -0.07026 -0.05194  1.08918 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)       1.086e+00  1.696e-03  640.41   <2e-16 ***
+Number_of_logins -2.181e-04  1.202e-05  -18.14   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2459 on 39998 degrees of freedom
+Multiple R-squared:  0.008158,  Adjusted R-squared:  0.008134 
+F-statistic:   329 on 1 and 39998 DF,  p-value: < 2.2e-16
       
 Summary of the Logistic Regression model (built using glm):
 
