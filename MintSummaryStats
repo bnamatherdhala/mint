@@ -147,7 +147,7 @@ Test Results:
          Less | Equal Var: -Inf, 401.0724
       Greater | Equal Var: 320.5513, Inf
       
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Call:
 lm(formula = Event ~ Number_of_logins, data = train)
 
@@ -165,7 +165,70 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 0.2459 on 39998 degrees of freedom
 Multiple R-squared:  0.008158,  Adjusted R-squared:  0.008134 
 F-statistic:   329 on 1 and 39998 DF,  p-value: < 2.2e-16
-      
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Call:
+lm(formula = Event ~ Number_of_logins * Offerid, data = train)
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.21818 -0.07625 -0.06795 -0.05110  1.10681 
+
+Coefficients:
+                                Estimate      Std. Error t value Pr(>|t|)    
+(Intercept)               1.748444667026  0.048917540960  35.743  < 2e-16 ***
+Number_of_logins         -0.002806797974  0.000369696262  -7.592 3.21e-14 ***
+Offerid                  -0.000014866356  0.000001100164 -13.513  < 2e-16 ***
+Number_of_logins:Offerid  0.000000058143  0.000000008307   6.999 2.62e-12 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2477 on 39996 degrees of freedom
+Multiple R-squared:  0.01322,   Adjusted R-squared:  0.01315 
+F-statistic: 178.7 on 3 and 39996 DF,  p-value: < 2.2e-16
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+
+> fit = lm(formula = Event ~ Number_of_logins * Offerid*Number.of.Bank.Accounts, data = train)
+> summary(fit)
+
+Call:
+lm(formula = Event ~ Number_of_logins * Offerid * Number.of.Bank.Accounts, 
+    data = train)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.28318 -0.07495 -0.06529 -0.04941  1.06633 
+
+Coefficients:
+                                                   Estimate Std. Error t value   
+(Intercept)                                       2.042e+00  9.256e-02  22.066
+Number_of_logins                                 -5.149e-03  6.602e-04  -7.800
+Offerid                                          -2.125e-05  2.080e-06 -10.216
+Number.of.Bank.Accounts                          -4.038e-01  8.550e-02  -4.723
+Number_of_logins:Offerid                          1.097e-07  1.480e-08   7.411
+Number_of_logins:Number.of.Bank.Accounts          3.109e-03  6.267e-04   4.961
+Offerid:Number.of.Bank.Accounts                   8.768e-06  1.921e-06   4.564
+Number_of_logins:Offerid:Number.of.Bank.Accounts -6.839e-08  1.406e-08  -4.866
+                                                 Pr(>|t|)    
+(Intercept)                                       < 2e-16 ***
+Number_of_logins                                 6.35e-15 ***
+Offerid                                           < 2e-16 ***
+Number.of.Bank.Accounts                          2.33e-06 ***
+Number_of_logins:Offerid                         1.28e-13 ***
+Number_of_logins:Number.of.Bank.Accounts         7.03e-07 ***
+Offerid:Number.of.Bank.Accounts                  5.02e-06 ***
+Number_of_logins:Offerid:Number.of.Bank.Accounts 1.15e-06 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2452 on 39992 degrees of freedom
+Multiple R-squared:  0.0131,    Adjusted R-squared:  0.01293 
+F-statistic: 75.85 on 7 and 39992 DF,  p-value: < 2.2e-16
+
+
+
+ -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     
 Summary of the Logistic Regression model (built using glm):
 
 glm(formula = Event1 ~ Number_of_logins, family = binomial(link = "logit"), 
@@ -189,7 +252,7 @@ Residual deviance: 454.15  on 998  degrees of freedom
 AIC: 458.15
 
 Number of Fisher Scoring iterations: 7
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Call:
 glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
     data = crs$dataset[crs$train, c(crs$input, crs$target)])
