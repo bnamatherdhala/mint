@@ -1,49 +1,64 @@
 # Load the data.
 
-crs$dataset <- read.csv("file:///C:/Users/bharatwaja/Desktop/mint.csv", na.strings=c(".", "NA", "", "?"), strip.white=TRUE, encoding="UTF-8")
+mint <- read.csv("file:///C:/Users/bharatwaja/Desktop/mint.csv", na.strings=c(".", "NA", "", "?"), strip.white=TRUE, encoding="UTF-8")
 
 # Build the training/validate/test datasets.
 
-set.seed(crv$seed) 
+set.seed(10001) 
 # A pre-defined value is used to reset the random seed so that results are repeatable.
+names(train)
+[1] "Userid"                  "Profile_creation_time"  
+[3] "Number.of.Bank.Accounts" "Monthly.Spend"          
+[5] "Monthly.Income"          "Number_of_logins"       
+[7] "Id"                      "Offerid"                
+[9] "Offer.time_stamp"        "Event"                  
+[11] "Merchant"  
 
-crv$seed <- 42 
-crs$nobs <- nrow(crs$dataset) # 71272 observations 
-crs$sample <- crs$train <- sample(nrow(crs$dataset), 0.7*crs$nobs) # 49890 observations
-crs$validate <- sample(setdiff(seq_len(nrow(crs$dataset)), crs$train), 0.15*crs$nobs) # 10690 observations
-crs$test <- setdiff(setdiff(seq_len(nrow(crs$dataset)), crs$train), crs$validate) # 10692 observations
+nobs <- nrow(mint) # 71272 observations 
+train = mint[sample(nrow(mint),1000),] # 1000 observations
+validate = mint[sample(nrow(mint),500),] # 5000 observations
+test = mint[sample(nrow(mint),300),] # 300 observations
 
+# The 'Hmisc' package provides the 'describe' function.
 
+library(Hmisc, quietly=TRUE)
+describe(train)
+
+# to check if there are any missing values
+is.na(Monthly.Income)
+is.na(Monthly.Spend)
+
+# Generate a description of the dataset.
 # The following variable selections have been noted.
 
-crs$input <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
+input <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
      "Monthly.Income", "Number_of_logins", "Id", "Offerid",
      "Offer.time_stamp", "Merchant")
 
-crs$numeric <- c("Number_of_logins", "Id", "Offerid")
+numeric <- c("Number_of_logins", "Id", "Offerid")
 
-crs$categoric <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
+categoric <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
      "Monthly.Income", "Offer.time_stamp", "Merchant")
 
-crs$target  <- "Event"
-crs$risk    <- NULL
-crs$ident   <- NULL
-crs$ignore  <- NULL
-crs$weights <- NULL
+target  <- "Event"
+risk    <- NULL
+ident   <- NULL
+ignore  <- NULL
+weights <- NULL
 
 
 library(Hmisc, quietly=TRUE)
 
 # Obtain a summary of the dataset.
 
-contents(crs$dataset[crs$sample, c(crs$input, crs$risk, crs$target)])
-summary(crs$dataset[crs$sample, c(crs$input, crs$risk, crs$target)])
+contents(mint[train, c(input, risk, target)])
+summary(mint[train, c(input, risk, target)])
 
 # Remap variables. 
 
 # Transform into a numeric.
 
-  crs$dataset[["TNM_Monthly.Spend"]] <- as.numeric(crs$dataset[["Monthly.Spend"]])
+  train[["TNM_Monthly.Spend"]] <- as.numeric(train[["Monthly.Spend"]])
 
 # Generate a correlation plot for the variables. 
 
@@ -53,16 +68,16 @@ library(corrplot, quietly=TRUE)
 
 # Correlations work for numeric variables only.
 
-crs$cor <- cor(crs$dataset[crs$sample, crs$numeric], use="pairwise", method="pearson")
+cor <- cor(train[train, numeric], use="pairwise", method="pearson")
 
 # Order the correlations by their strength.
 
-crs$ord <- order(crs$cor[1,])
-crs$cor <- crs$cor[crs$ord, crs$ord]
+ord <- order(cor[1,])
+cor <- cor[ord, ord]
 
 # Display the actual correlations.
 
-print(crs$cor)
+print(cor)
 
 # Graphically display the correlations.
 
@@ -79,20 +94,25 @@ library(reshape, quietly=TRUE)
 
 # Rescale Event.
 
-crs$dataset[["R01_Event"]] <- crs$dataset[["Event"]]
+train[["R01_Event"]] <- train[["Event"]]
 
 # Rescale to [0,1].
 
+
+range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+
+Event1 = range01(Event)
+
 if (building)
 {
-  crs$dataset[["R01_Event"]] <-  rescaler(crs$dataset[["Event"]], "range")
+  train[["R01_Event"]] <-  rescaler(train[["Event"]], "range")
 }
 
 # When scoring transform using the training data parameters.
 
 if (scoring)
 {
-  crs$dataset[["R01_Event"]] <- (crs$dataset[["Event"]] - 1.000000)/abs(2.000000 - 1.000000)
+  train[["R01_Event"]] <- (train[["Event"]] - 1.000000)/abs(2.000000 - 1.000000)
 }
 
 # Perform Test 
@@ -103,46 +123,48 @@ library(fBasics, quietly=TRUE)
 
 # Perform the test.
 
-ks2Test(na.omit(crs$dataset[crs$dataset[["R01_Event"]] == "0", "Offerid"]), na.omit(crs$dataset[crs$dataset[["R01_Event"]] == "1", "Offerid"]))
+ks2Test(na.omit(train[train[["R01_Event"]] == "0", "Offerid"]), na.omit(train[train[["R01_Event"]] == "1", "Offerid"]))
 
 
 # The following variable selections have been noted.
 
-crs$input <- c("Number_of_logins", "Offerid", "Merchant", "TNM_Monthly.Income",
+input <- c("Number_of_logins", "Offerid", "Merchant", "TNM_Monthly.Income",
      "TNM_Monthly.Spend", "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
 
-crs$numeric <- c("Number_of_logins", "Offerid", "TNM_Monthly.Income", "TNM_Monthly.Spend",
+numeric <- c("Number_of_logins", "Offerid", "TNM_Monthly.Income", "TNM_Monthly.Spend",
      "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
 
 crs$categoric <- "Merchant"
 
-crs$target  <- "R01_Event"
-crs$risk    <- NULL
-crs$ident   <- NULL
-crs$ignore  <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Id", "Offer.time_stamp", "Event")
-crs$weights <- NULL
+target  <- "R01_Event"
+risk    <- NULL
+ident   <- NULL
+ignore  <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Id", "Offer.time_stamp", "Event")
+weights <- NULL
 
 
 # Regression model 
 
 # Build a Regression model.
 
-crs$glm <- glm(R01_Event ~ .,
+fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
+
+glm <- glm(R01_Event ~ .,
     data=crs$dataset[crs$train, c(crs$input, crs$target)],
     family=binomial(link="logit"))
 
 # Generate a textual view of the Linear model.
 
-print(summary(crs$glm))
+print(summary(glm))
 cat(sprintf("Log likelihood: %.3f (%d df)\n",
-            logLik(crs$glm)[1],
-            attr(logLik(crs$glm), "df")))
+            logLik(glm)[1],
+            attr(logLik(glm), "df")))
 cat(sprintf("Null/Residual deviance difference: %.3f (%d df)\n",
-            crs$glm$null.deviance-crs$glm$deviance,
-            crs$glm$df.null-crs$glm$df.residual))
+            glm$null.deviance-crs$glm$deviance,
+            glm$df.null-crs$glm$df.residual))
 cat(sprintf("Chi-square p-value: %.8f\n",
-            dchisq(crs$glm$null.deviance-crs$glm$deviance,
-                   crs$glm$df.null-crs$glm$df.residual)))
+            dchisq(glm$null.deviance-crs$glm$deviance,
+                   glm$df.null-crs$glm$df.residual)))
 cat(sprintf("Pseudo R-Square (optimistic): %.8f\n",
              cor(crs$glm$y, crs$glm$fitted.values)))
 cat('\n==== ANOVA ====\n\n')

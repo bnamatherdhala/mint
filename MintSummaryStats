@@ -150,6 +150,28 @@ Test Results:
       
 Summary of the Logistic Regression model (built using glm):
 
+glm(formula = Event1 ~ Number_of_logins, family = binomial(link = "logit"), 
+    data = train)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.5221  -0.4415  -0.3547  -0.2112   3.0328  
+
+Coefficients:
+                  Estimate Std. Error z value  Pr(>|z|)    
+(Intercept)      -1.912818   0.187597  -10.20   < 2e-16 ***
+Number_of_logins -0.011104   0.002735   -4.06 0.0000491 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 481.02  on 999  degrees of freedom
+Residual deviance: 454.15  on 998  degrees of freedom
+AIC: 458.15
+
+Number of Fisher Scoring iterations: 7
+
 Call:
 glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
     data = crs$dataset[crs$train, c(crs$input, crs$target)])
