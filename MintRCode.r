@@ -30,6 +30,8 @@ is.na(Monthly.Income)
 is.na(Monthly.Spend)
 
 # Generate a description of the dataset.
+
+
 # The following variable selections have been noted.
 
 input <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
@@ -161,6 +163,11 @@ weights <- NULL
 
 # Build a Regression model.
 fit = lm(formula = Event ~ Number_of_logins * Offerid*Number.of.Bank.Accounts, data = train)
+
+# Confidence intervals for the model
+confint(fit)
+
+
 fit = lm(formula = Event ~ Number_of_logins * Offerid, data = train)
 
 
@@ -196,6 +203,7 @@ cat("\n")
 
 # Time taken: 6.66 secs
 
+pred =   predict(fit, data.frame(Event = c(5,10)), interval = "confidence")
 
 
 
