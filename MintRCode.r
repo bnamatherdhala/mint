@@ -116,6 +116,7 @@ train[["R01_Event"]] <- train[["Event"]]
 
 
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+R01_Event = range(Event)
 
 Event1 = range01(Event)
 
@@ -207,7 +208,10 @@ cat("\n")
 
 # Time taken: 6.66 secs
 
+
+#Predict method for Linear Model Fits
 pred =   predict(fit, data.frame(Event , interval = "confidence")
+pred =   predict(fit, data.frame(Event , interval = "prediction")
 
 
 
