@@ -216,6 +216,12 @@ Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’
 Residual standard error: 0.2451 on 39996 degrees of freedom
 Multiple R-squared:  0.01418,  Adjusted R-squared:  0.01411 
 F-statistic: 191.8 on 3 and 39996 DF,  p-value: < 2.2e-16
+
+pred =   predict(fit, data.frame(Event , interval = "prediction")
++ )
+head(pred)
+       1        2        3        4        5        6 
+1.103901 1.060669 1.047889 1.065479 1.058924 1.022904 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Call:
 lm(formula = Event ~ Number_of_logins + Offerid + Number.of.Bank.Accounts, 
