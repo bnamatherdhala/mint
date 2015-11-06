@@ -159,6 +159,10 @@ ignore  <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Id",
 weights <- NULL
 
 
+#plot the response vs predictors
+
+plot(Event~I(Number_of_logins^2))
+plot(Event~Number_of_logins)
 # Regression model 
 
 # Build a Regression model.
@@ -203,7 +207,10 @@ cat("\n")
 
 # Time taken: 6.66 secs
 
-pred =   predict(fit, data.frame(Event = c(5,10)), interval = "confidence")
+pred =   predict(fit, data.frame(Event , interval = "confidence")
+
+
+
 
 
 

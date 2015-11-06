@@ -146,25 +146,97 @@ Test Results:
     Two-Sided | Equal Var: 312.8382, 408.7855
          Less | Equal Var: -Inf, 401.0724
       Greater | Equal Var: 320.5513, Inf
-      
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Call:
-lm(formula = Event ~ Number_of_logins, data = train)
+
+-----------------------------------------------------------------------------------------------
+      Call:
+lm(formula = Event ~ Number_of_logins + Offerid + Number.of.Bank.Accounts + 
+    Merchant, data = train)
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--0.08618 -0.07986 -0.07026 -0.05194  1.08918 
+-0.93389 -0.07434 -0.05937 -0.04031  1.08233 
 
 Coefficients:
-                   Estimate Std. Error t value Pr(>|t|)    
-(Intercept)       1.086e+00  1.696e-03  640.41   <2e-16 ***
-Number_of_logins -2.181e-04  1.202e-05  -18.14   <2e-16 ***
+                                   Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                       2.021e+00  1.671e-01  12.093  < 2e-16 ***
+Number_of_logins                 -2.173e-04  1.195e-05 -18.188  < 2e-16 ***
+Offerid                          -2.079e-05  3.708e-06  -5.607 2.07e-08 ***
+Number.of.Bank.Accounts          -4.783e-03  1.897e-03  -2.522 0.011679 *  
+MerchantCapital One 360           4.767e-03  1.290e-02   0.370 0.711656    
+MerchantChase                    -1.587e-02  5.034e-03  -3.153 0.001618 ** 
+MerchantChoose Energy             6.931e-02  1.382e-02   5.015 5.32e-07 ***
+MerchantCiti                     -1.605e-02  8.994e-03  -1.785 0.074301 .  
+Merchantctg.discovery.intuit.com  1.034e-01  1.478e-02   6.996 2.68e-12 ***
+MerchantEfinancial               -4.015e-02  2.197e-02  -1.827 0.067678 .  
+MerchantFidelity                 -4.389e-03  6.289e-03  -0.698 0.485254    
+MerchantFutureAdvisor            -8.019e-03  6.867e-03  -1.168 0.242911    
+MerchantInsWeb                   -1.352e-01  3.608e-02  -3.747 0.000179 ***
+MerchantLending Club              5.825e-02  6.869e-03   8.480  < 2e-16 ***
+MerchantLevanto                   3.172e-02  1.406e-02   2.257 0.024027 *  
+MerchantMotif                    -7.585e-02  1.399e-01  -0.542 0.587796    
+MerchantMotif Investing          -1.939e-03  5.429e-03  -0.357 0.721037    
+MerchantPersonal Capital         -5.055e-02  1.208e-02  -4.186 2.85e-05 ***
+MerchantProgressive              -7.100e-04  1.347e-02  -0.053 0.957976    
+MerchantProgrexion               -3.940e-02  1.202e-02  -3.278 0.001048 ** 
+MerchantQuicken Loans            -4.861e-02  1.289e-02  -3.771 0.000163 ***
+MerchantQuinstreet               -9.725e-02  4.484e-02  -2.169 0.030122 *  
+MerchantRate Supermarket         -5.202e-02  1.433e-02  -3.631 0.000283 ***
+MerchantRateSuperMarket.ca        8.885e-01  6.312e-02  14.076  < 2e-16 ***
+MerchantScotiabank                8.326e-01  3.871e-02  21.508  < 2e-16 ***
+MerchantWealthfront              -3.418e-02  9.372e-03  -3.647 0.000266 ***
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
-Residual standard error: 0.2459 on 39998 degrees of freedom
-Multiple R-squared:  0.008158,  Adjusted R-squared:  0.008134 
-F-statistic:   329 on 1 and 39998 DF,  p-value: < 2.2e-16
+Residual standard error: 0.2422 on 39974 degrees of freedom
+Multiple R-squared:  0.0379,  Adjusted R-squared:  0.0373 
+F-statistic: 62.98 on 25 and 39974 DF,  p-value: < 2.2e-16
+
+------------------------------------------------------------------------------------------------------------------------
+
+fit3 = lm(formula = Event ~ Number_of_logins+I(Number_of_logins^2) + I(Offerid^2), data = train)
+> summary(fit3)
+
+Call:
+lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
+    I(Offerid^2), data = train)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.17292 -0.08387 -0.06676 -0.03928  1.00289 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            1.307e+00  1.845e-02   70.83   <2e-16 ***
+Number_of_logins      -4.702e-04  2.564e-05  -18.34   <2e-16 ***
+I(Number_of_logins^2)  5.809e-07  5.234e-08   11.10   <2e-16 ***
+I(Offerid^2)          -1.052e-10  9.275e-12  -11.34   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2451 on 39996 degrees of freedom
+Multiple R-squared:  0.01418,  Adjusted R-squared:  0.01411 
+F-statistic: 191.8 on 3 and 39996 DF,  p-value: < 2.2e-16
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Call:
+lm(formula = Event ~ Number_of_logins + Offerid + Number.of.Bank.Accounts, 
+    data = train)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.16492 -0.07753 -0.06719 -0.04909  1.09493 
+
+Coefficients:
+                          Estimate Std. Error t value Pr(>|t|)    
+(Intercept)              1.458e+00  3.377e-02  43.171  < 2e-16 ***
+Number_of_logins        -2.194e-04  1.201e-05 -18.269  < 2e-16 ***
+Offerid                 -8.207e-06  7.586e-07 -10.820  < 2e-16 ***
+Number.of.Bank.Accounts -7.600e-03  1.907e-03  -3.985 6.76e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2455 on 39996 degrees of freedom
+Multiple R-squared:  0.01144,  Adjusted R-squared:  0.01136 
+F-statistic: 154.3 on 3 and 39996 DF,  p-value: < 2.2e-16
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Call:
