@@ -209,9 +209,18 @@ cat("\n")
 # Time taken: 6.66 secs
 
 
-#Predict method for Linear Model Fits
-pred =   predict(fit, data.frame(Event , interval = "confidence")
-pred =   predict(fit, data.frame(Event , interval = "prediction")
+# ... and predict data on validation data-set
+prediction = predict(fit,validate, type = "response")
+
+
+# ----- Predict submission dataset ---------------------------------------------
+
+submissionData = data.frame(ID = validate$Userid, Event = prediction)
+submissionFile <- paste0("glm", format(Sys.time(), "%Y-%m-%d-%H:%M:%S"), ".csv")
+
+
+write.csv(submissionData, file="C:/Users/bnamatherdhala/Desktop/submissionFile", row.names=FALSE)
+
 
 
 
