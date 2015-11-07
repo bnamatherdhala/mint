@@ -461,6 +461,11 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 Time taken: 6.66 secs
 
 
+ggplot(data1,aes(x = Number_of_logins, y = Event))+ geom_point(colour = 'red',size = 7)+geom_smooth(method =lm)+ ylab ("Event")+ xlab ('Number_of_logins')
+
+
+
+
 
       
       

@@ -75,10 +75,7 @@ library(corrplot, quietly=TRUE)
 > plot(Event~Number_of_logins,Offerid, data = train)
 Error in plot.xy(xy, type, ...) : invalid plot type
 > plot(Event~Number_of_logins, data = train)
-> names(train)
- [1] "Userid"                  "Profile_creation_time"   "Number.of.Bank.Accounts" "Monthly.Spend"           "Monthly.Income"         
- [6] "Number_of_logins"        "Id"                      "Offerid"                 "Offer.time_stamp"        "Event"                  
-[11] "Merchant"               
+              
 > plot(Event~Monthly.Spend,data = train)
 
 
@@ -120,17 +117,7 @@ R01_Event = range(Event)
 
 Event1 = range01(Event)
 
-if (building)
-{
-  train[["R01_Event"]] <-  rescaler(train[["Event"]], "range")
-}
 
-# When scoring transform using the training data parameters.
-
-if (scoring)
-{
-  train[["R01_Event"]] <- (train[["Event"]] - 1.000000)/abs(2.000000 - 1.000000)
-}
 
 # Perform Test 
 
@@ -143,21 +130,7 @@ library(fBasics, quietly=TRUE)
 ks2Test(na.omit(train[train[["R01_Event"]] == "0", "Offerid"]), na.omit(train[train[["R01_Event"]] == "1", "Offerid"]))
 
 
-# The following variable selections have been noted.
 
-input <- c("Number_of_logins", "Offerid", "Merchant", "TNM_Monthly.Income",
-     "TNM_Monthly.Spend", "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
-
-numeric <- c("Number_of_logins", "Offerid", "TNM_Monthly.Income", "TNM_Monthly.Spend",
-     "TNM_Number.of.Bank.Accounts", "TNM_Offer.time_stamp")
-
-crs$categoric <- "Merchant"
-
-target  <- "R01_Event"
-risk    <- NULL
-ident   <- NULL
-ignore  <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Id", "Offer.time_stamp", "Event")
-weights <- NULL
 
 
 #plot the response vs predictors

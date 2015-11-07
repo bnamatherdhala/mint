@@ -1,0 +1,47 @@
+Within the Mint phone app, part of our monetization is from advertising for financial services we think our customers would benefit from.  Intuit is looking to better target these, so that we show users fewer advertisements they would not be interested in.  We would like you to take a look at some data on the most prominent spot within the Mint App.
+
+ 
+
+Attached, we have a sample data set of 2,000 hypothetical Mint users that use our iOS app.  There are two sheets in the workbook, one contains details related to the offers shown to the users in the app, and the other contains data related to the profile of users.
+
+ 
+
+Below is the description of the data columns:
+
+ 
+
+Userid – Unique ID for each user
+
+ID – Random ID assigned for each row in the table
+
+OfferID – Each offer has a unique OfferID
+
+Offer time_stamp – When the impression/click occurred
+
+Event – 1 denotes impression and 2 denotes click
+
+Merchant – Merchant related to each offer
+
+Profile_creation_time – When the user profile was created
+
+Number_of_Bank_Accounts – Number of bank accounts linked to Mint
+
+Monthly Income – Monthly income for September
+
+Monthly Spend- Monthly spend for September
+
+Number_of_Logins – Number of times a user logs-in on the App in September
+
+ 
+
+Your solution should cover the following points:
+
+·        Your strategy for optimization
+
+·        What additional data would you want to track in order to do better?
+
+·        What additional factors would you think would be beneficial to look at?
+
+o   To help monetize better?
+
+o   To create a better user experience?
