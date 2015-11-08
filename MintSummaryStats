@@ -394,29 +394,78 @@ Warning message:
 
 
  -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     
-Summary of the Logistic Regression model (built using glm):
+summary(fit6)
 
-glm(formula = Event1 ~ Number_of_logins, family = binomial(link = "logit"), 
-    data = train)
+Call:
+glm(formula = Event ~ Offerid + Number.of.Bank.Accounts + Merchant * 
+    Monthly.Income + Monthly.Spend + Monthly.Income, family = binomial(link = "logit"), 
+    data = train2)
 
 Deviance Residuals: 
     Min       1Q   Median       3Q      Max  
--0.5221  -0.4415  -0.3547  -0.2112   3.0328  
+-1.3018  -0.3724  -0.3387  -0.2946   3.6289  
 
-Coefficients:
-                  Estimate Std. Error z value  Pr(>|z|)    
-(Intercept)      -1.912818   0.187597  -10.20   < 2e-16 ***
-Number_of_logins -0.011104   0.002735   -4.06 0.0000491 ***
+Coefficients: (1 not defined because of singularities)
+                                                  Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                                      1.038e+01  2.547e+00   4.075 4.61e-05 ***
+Offerid                                         -2.908e-04  5.648e-05  -5.147 2.64e-07 ***
+Number.of.Bank.Accounts                          5.710e-02  3.668e-02   1.557 0.119519    
+MerchantCapital One 360                          8.259e-01  3.119e-01   2.648 0.008096 ** 
+MerchantChase                                   -5.641e-02  1.224e-01  -0.461 0.644935    
+MerchantChoose Energy                            6.290e-01  2.257e-01   2.786 0.005330 ** 
+MerchantCiti                                     4.051e-01  2.727e-01   1.486 0.137389    
+Merchantctg.discovery.intuit.com                 1.475e+00  3.839e-01   3.842 0.000122 ***
+MerchantEfinancial                              -1.550e+00  1.108e+00  -1.400 0.161635    
+MerchantFidelity                                 1.191e-01  1.375e-01   0.866 0.386592    
+MerchantFutureAdvisor                            3.582e-02  1.530e-01   0.234 0.814935    
+MerchantInsWeb                                  -1.903e+00  5.540e-01  -3.435 0.000593 ***
+MerchantLending Club                             1.270e+00  1.499e-01   8.477  < 2e-16 ***
+MerchantLevanto                                  6.159e-01  2.853e-01   2.159 0.030874 *  
+MerchantMotif                                   -1.861e+01  1.688e+04  -0.001 0.999120    
+MerchantMotif Investing                          1.237e-01  1.245e-01   0.994 0.320216    
+MerchantPersonal Capital                        -1.429e+00  3.711e-01  -3.849 0.000119 ***
+MerchantProgressive                             -1.771e-02  2.204e-01  -0.080 0.935941    
+MerchantProgrexion                              -1.105e+00  2.655e-01  -4.162 3.15e-05 ***
+MerchantQuicken Loans                           -4.656e-01  2.785e-01  -1.672 0.094556 .  
+MerchantQuinstreet                              -1.933e+01  6.364e+03  -0.003 0.997577    
+MerchantRate Supermarket                        -9.846e-01  4.269e-01  -2.307 0.021083 *  
+MerchantRateSuperMarket.ca                       2.370e+01  1.893e+04   0.001 0.999001    
+MerchantScotiabank                               2.771e+00  7.733e-01   3.584 0.000339 ***
+MerchantWealthfront                             -5.892e-01  2.101e-01  -2.804 0.005043 ** 
+Monthly.Income                                  -9.046e-06  9.512e-06  -0.951 0.341598    
+Monthly.Spend                                   -3.449e-05  5.899e-06  -5.846 5.02e-09 ***
+MerchantCapital One 360:Monthly.Income          -4.029e-05  2.474e-05  -1.628 0.103473    
+MerchantChase:Monthly.Income                    -4.016e-06  9.970e-06  -0.403 0.687043    
+MerchantChoose Energy:Monthly.Income             1.633e-05  1.195e-05   1.367 0.171747    
+MerchantCiti:Monthly.Income                     -4.648e-05  2.369e-05  -1.962 0.049788 *  
+Merchantctg.discovery.intuit.com:Monthly.Income -1.788e-04  1.160e-04  -1.541 0.123289    
+MerchantEfinancial:Monthly.Income                2.249e-05  3.879e-05   0.580 0.561987    
+MerchantFidelity:Monthly.Income                  6.194e-06  9.692e-06   0.639 0.522758    
+MerchantFutureAdvisor:Monthly.Income             3.413e-06  1.019e-05   0.335 0.737597    
+MerchantInsWeb:Monthly.Income                    9.910e-06  9.619e-06   1.030 0.302880    
+MerchantLending Club:Monthly.Income             -3.818e-05  1.268e-05  -3.010 0.002610 ** 
+MerchantLevanto:Monthly.Income                   5.450e-06  1.139e-05   0.478 0.632342    
+MerchantMotif:Monthly.Income                            NA         NA      NA       NA    
+MerchantMotif Investing:Monthly.Income           4.952e-06  9.672e-06   0.512 0.608659    
+MerchantPersonal Capital:Monthly.Income          1.174e-05  9.597e-06   1.223 0.221242    
+MerchantProgressive:Monthly.Income               7.653e-06  1.103e-05   0.694 0.487606    
+MerchantProgrexion:Monthly.Income                4.681e-05  1.418e-05   3.303 0.000958 ***
+MerchantQuicken Loans:Monthly.Income             1.044e-06  1.265e-05   0.083 0.934241    
+MerchantQuinstreet:Monthly.Income                1.958e-05  9.835e-02   0.000 0.999841    
+MerchantRate Supermarket:Monthly.Income          1.506e-05  1.636e-05   0.921 0.357101    
+MerchantRateSuperMarket.ca:Monthly.Income        1.044e-05  6.610e-01   0.000 0.999987    
+MerchantScotiabank:Monthly.Income                3.002e-01  3.057e+00   0.098 0.921775    
+MerchantWealthfront:Monthly.Income               1.032e-05  9.523e-06   1.084 0.278522    
 ---
 Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 481.02  on 999  degrees of freedom
-Residual deviance: 454.15  on 998  degrees of freedom
-AIC: 458.15
+    Null deviance: 19283  on 39999  degrees of freedom
+Residual deviance: 18320  on 39952  degrees of freedom
+AIC: 18416
 
-Number of Fisher Scoring iterations: 7
+Number of Fisher Scoring iterations: 20
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Call:
 glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
