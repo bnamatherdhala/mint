@@ -583,9 +583,101 @@ AIC: 18510
 Number of Fisher Scoring iterations: 13
 
 
+> confint(fit5)
+Waiting for profiling to be done...
+                                         2.5 %        97.5 %
+(Intercept)                       5.248680e+00  1.520992e+01
+Offerid                          -3.990773e-04 -1.781112e-04
+Number.of.Bank.Accounts           1.271563e-02  1.540631e-01
+MerchantCapital One 360          -7.763246e-02  7.209037e-01
+MerchantChase                    -3.094120e-01  5.154460e-02
+MerchantChoose Energy             4.554372e-01  1.180227e+00
+MerchantCiti                     -4.707976e-01  2.004564e-01
+Merchantctg.discovery.intuit.com  5.914222e-01  1.304566e+00
+MerchantEfinancial               -2.955562e+00  9.981521e-03
+MerchantFidelity                 -2.684951e-02  4.039579e-01
+MerchantFutureAdvisor            -1.836179e-01  2.912997e-01
+MerchantInsWeb                   -2.808747e+00 -6.649586e-01
+MerchantLending Club              6.377473e-01  1.048578e+00
+MerchantLevanto                   2.399971e-01  1.088524e+00
+MerchantMotif                               NA  5.492517e+01
+MerchantMotif Investing          -2.003744e-02  3.593264e-01
+MerchantPersonal Capital         -1.581524e+00 -3.520902e-01
+MerchantProgressive              -3.391153e-01  4.478251e-01
+MerchantProgrexion               -1.109807e+00 -2.533573e-01
+MerchantQuicken Loans            -9.212297e-01 -6.125969e-02
+MerchantQuinstreet               -5.781016e+01 -4.048051e+00
+MerchantRate Supermarket         -1.348954e+00 -2.135454e-01
+MerchantRateSuperMarket.ca        2.014852e+00            NA
+MerchantScotiabank                4.040611e+00  6.507941e+00
+MerchantWealthfront              -7.407690e-01  1.080652e-02
+Monthly.Spend                    -5.624225e-05 -3.390659e-05
+Monthly.Income                   -3.912683e-06 -1.088976e-06
+
+> exp(confint(fit5))
+Waiting for profiling to be done...
+                                        2.5 %       97.5 %
+(Intercept)                      1.903149e+02 4.032587e+06
+Offerid                          9.996010e-01 9.998219e-01
+Number.of.Bank.Accounts          1.012797e+00 1.166564e+00
+MerchantCapital One 360          9.253045e-01 2.056291e+00
+MerchantChase                    7.338783e-01 1.052896e+00
+MerchantChoose Energy            1.576863e+00 3.255113e+00
+MerchantCiti                     6.245040e-01 1.221960e+00
+Merchantctg.discovery.intuit.com 1.806556e+00 3.686089e+00
+MerchantEfinancial               5.204942e-02 1.010032e+00
+MerchantFidelity                 9.735077e-01 1.497741e+00
+MerchantFutureAdvisor            8.322538e-01 1.338166e+00
+MerchantInsWeb                   6.028045e-02 5.142948e-01
+MerchantLending Club             1.892214e+00 2.853590e+00
+MerchantLevanto                  1.271245e+00 2.969888e+00
+MerchantMotif                              NA 7.139985e+23
+MerchantMotif Investing          9.801620e-01 1.432364e+00
+MerchantPersonal Capital         2.056615e-01 7.032167e-01
+MerchantProgressive              7.124003e-01 1.564905e+00
+MerchantProgrexion               3.296225e-01 7.761905e-01
+MerchantQuicken Loans            3.980293e-01 9.405790e-01
+MerchantQuinstreet               7.822876e-26 1.745637e-02
+MerchantRate Supermarket         2.595116e-01 8.077155e-01
+MerchantRateSuperMarket.ca       7.499616e+00           NA
+MerchantScotiabank               5.686107e+01 6.704445e+02
+MerchantWealthfront              4.767472e-01 1.010865e+00
+Monthly.Spend                    9.999438e-01 9.999661e-01
+Monthly.Income                   9.999961e-01 9.999989e-01
 
 
 
+
+
+exp(fit5$coefficients)
+                     (Intercept)                          Offerid 
+                    2.849609e+04                     9.997108e-01 
+         Number.of.Bank.Accounts          MerchantCapital One 360 
+                    1.087409e+00                     1.399550e+00 
+                   MerchantChase            MerchantChoose Energy 
+                    8.766626e-01                     2.284903e+00 
+                    MerchantCiti Merchantctg.discovery.intuit.com 
+                    8.811998e-01                     2.602788e+00 
+              MerchantEfinancial                 MerchantFidelity 
+                    3.171116e-01                     1.206103e+00 
+           MerchantFutureAdvisor                   MerchantInsWeb 
+                    1.055651e+00                     1.750911e-01 
+            MerchantLending Club                  MerchantLevanto 
+                    2.319870e+00                     1.976206e+00 
+                   MerchantMotif          MerchantMotif Investing 
+                    9.435404e-06                     1.182203e+00 
+        MerchantPersonal Capital              MerchantProgressive 
+                    3.982580e-01                     1.054652e+00 
+              MerchantProgrexion            MerchantQuicken Loans 
+                    5.117721e-01                     6.151063e-01 
+              MerchantQuinstreet         MerchantRate Supermarket 
+                    6.979828e-06                     4.737886e-01 
+      MerchantRateSuperMarket.ca               MerchantScotiabank 
+                    2.105826e+07                     1.602025e+02 
+             MerchantWealthfront                    Monthly.Spend 
+                    7.026806e-01                     9.999551e-01 
+                  Monthly.Income 
+                    9.999976e-01 
 
       
       
