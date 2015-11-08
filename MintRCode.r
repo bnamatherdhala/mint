@@ -117,6 +117,16 @@ R01_Event = range(Event)
 
 Event1 = range01(Event)
 
+##resclae currency
+convertCurrency <- function(currency) {
+  +     currency1 <- sub('$','',as.character(currency),fixed=TRUE)
+  +     currency2 <- as.numeric(gsub('\\,','',as.character(currency1))) 
+  +     currency2
+  + }
+train2$Monthly.Income = convertCurrency(train2$Monthly.Spend)
+
+train2$Monthly.Spend = convertCurrency(train2$Monthly.Spend)
+
 
 
 # Perform Test 

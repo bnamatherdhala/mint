@@ -224,6 +224,74 @@ head(pred)
 1.103901 1.060669 1.047889 1.065479 1.058924 1.022904 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Call:
+lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
+    I(Offerid^2) + Monthly.Income, data = train2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.17368 -0.08359 -0.06672 -0.03991  1.08984 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            1.309e+00  1.846e-02  70.915  < 2e-16 ***
+Number_of_logins      -4.627e-04  2.572e-05 -17.985  < 2e-16 ***
+I(Number_of_logins^2)  5.763e-07  5.235e-08  11.008  < 2e-16 ***
+I(Offerid^2)          -1.056e-10  9.275e-12 -11.387  < 2e-16 ***
+Monthly.Income        -8.121e-08  2.255e-08  -3.601 0.000318 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.2451 on 39995 degrees of freedom
+Multiple R-squared:  0.0145,  Adjusted R-squared:  0.0144 
+F-statistic: 147.1 on 4 and 39995 DF,  p-value: < 2.2e-16
+------------------------------------------------------------------
+Call:
+lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
+    I(Offerid^2) + Monthly.Income + Monthly.Spend, data = train2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.17871 -0.08399 -0.06594 -0.03862  1.04227 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            1.316e+00  1.848e-02  71.219  < 2e-16 ***
+Number_of_logins      -4.563e-04  2.573e-05 -17.737  < 2e-16 ***
+I(Number_of_logins^2)  5.655e-07  5.235e-08  10.802  < 2e-16 ***
+I(Offerid^2)          -1.073e-10  9.273e-12 -11.570  < 2e-16 ***
+Monthly.Income        -4.110e-08  2.333e-08  -1.762   0.0781 .  
+Monthly.Spend         -1.047e-06  1.573e-07  -6.659 2.79e-11 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.245 on 39994 degrees of freedom
+Multiple R-squared:  0.01559,  Adjusted R-squared:  0.01547 
+F-statistic: 126.7 on 5 and 39994 DF,  p-value: < 2.2e-16
+----------------------------------------------------------------------------------------
+
+Call:
+lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
+    I(Offerid^2) + Monthly.Spend, data = train2)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.17848 -0.08397 -0.06596 -0.03820  1.04885 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)            1.315e+00  1.847e-02  71.200  < 2e-16 ***
+Number_of_logins      -4.595e-04  2.567e-05 -17.901  < 2e-16 ***
+I(Number_of_logins^2)  5.669e-07  5.234e-08  10.831  < 2e-16 ***
+I(Offerid^2)          -1.072e-10  9.273e-12 -11.561  < 2e-16 ***
+Monthly.Spend         -1.119e-06  1.520e-07  -7.363 1.83e-13 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.245 on 39995 degrees of freedom
+Multiple R-squared:  0.01552,  Adjusted R-squared:  0.01542 
+F-statistic: 157.6 on 4 and 39995 DF,  p-value: < 2.2e-16
+-------------------------------------------------------------------------------------
+Call:
 lm(formula = Event ~ Number_of_logins + Offerid + Number.of.Bank.Accounts, 
     data = train)
 
@@ -462,6 +530,58 @@ Time taken: 6.66 secs
 
 
 ggplot(data1,aes(x = Number_of_logins, y = Event))+ geom_point(colour = 'red',size = 7)+geom_smooth(method =lm)+ ylab ("Event")+ xlab ('Number_of_logins')
+
+
+--------------------------------------------------------------------------------------------------------
+Call:
+glm(formula = Event ~ Offerid + Number.of.Bank.Accounts + Merchant + 
+    Monthly.Spend + Monthly.Income, family = binomial(link = "logit"), 
+    data = train2)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2865  -0.3725  -0.3332  -0.3002   4.2882  
+
+Coefficients:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       1.026e+01  2.540e+00   4.039 5.37e-05 ***
+Offerid                          -2.892e-04  5.633e-05  -5.134 2.84e-07 ***
+Number.of.Bank.Accounts           8.380e-02  3.606e-02   2.324 0.020130 *  
+MerchantCapital One 360           3.362e-01  2.031e-01   1.655 0.097851 .  
+MerchantChase                    -1.316e-01  9.202e-02  -1.430 0.152589    
+MerchantChoose Energy             8.263e-01  1.846e-01   4.477 7.57e-06 ***
+MerchantCiti                     -1.265e-01  1.709e-01  -0.740 0.459209    
+Merchantctg.discovery.intuit.com  9.566e-01  1.815e-01   5.270 1.37e-07 ***
+MerchantEfinancial               -1.149e+00  7.178e-01  -1.600 0.109615    
+MerchantFidelity                  1.874e-01  1.098e-01   1.706 0.087974 .  
+MerchantFutureAdvisor             5.416e-02  1.211e-01   0.447 0.654596    
+MerchantInsWeb                   -1.742e+00  5.466e-01  -3.188 0.001433 ** 
+MerchantLending Club              8.415e-01  1.047e-01   8.034 9.42e-16 ***
+MerchantLevanto                   6.812e-01  2.157e-01   3.158 0.001587 ** 
+MerchantMotif                    -1.157e+01  5.097e+02  -0.023 0.981887    
+MerchantMotif Investing           1.674e-01  9.672e-02   1.731 0.083517 .  
+MerchantPersonal Capital         -9.207e-01  3.109e-01  -2.961 0.003068 ** 
+MerchantProgressive               5.321e-02  2.007e-01   0.265 0.790887    
+MerchantProgrexion               -6.699e-01  2.179e-01  -3.074 0.002114 ** 
+MerchantQuicken Loans            -4.860e-01  2.191e-01  -2.218 0.026572 *  
+MerchantQuinstreet               -1.187e+01  1.576e+02  -0.075 0.939942    
+MerchantRate Supermarket         -7.470e-01  2.877e-01  -2.596 0.009428 ** 
+MerchantRateSuperMarket.ca        1.686e+01  2.279e+02   0.074 0.941013    
+MerchantScotiabank                5.076e+00  6.077e-01   8.353  < 2e-16 ***
+MerchantWealthfront              -3.529e-01  1.912e-01  -1.845 0.064986 .  
+Monthly.Spend                    -4.487e-05  5.700e-06  -7.873 3.45e-15 ***
+Monthly.Income                   -2.406e-06  7.196e-07  -3.343 0.000828 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 19283  on 39999  degrees of freedom
+Residual deviance: 18456  on 39973  degrees of freedom
+AIC: 18510
+
+Number of Fisher Scoring iterations: 13
+
 
 
 
