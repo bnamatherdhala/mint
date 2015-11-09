@@ -1,5 +1,5 @@
 # Load the data.
-
+crs$dataset <- read.csv("file:///C:/Users/bharatwaja/Desktop/mint.csv", na.strings=c(".", "NA", "", "?"), strip.white=TRUE, encoding="UTF-8")
 mint <- read.csv("file:///C:/Users/bharatwaja/Desktop/mint.csv", na.strings=c(".", "NA", "", "?"), strip.white=TRUE, encoding="UTF-8")
 
 # Build the training/validate/test datasets.
@@ -126,7 +126,34 @@ train2$Monthly.Income = convertCurrency(train2$Monthly.Spend)
 
 train2$Monthly.Spend = convertCurrency(train2$Monthly.Spend)
 
+## Bar Plot 
 
+# Generate the summary data for plotting.
+
+ds <- rbind(summary(na.omit(crs$dataset[crs$sample,]$time_Stamp)),
+    summary(na.omit(crs$dataset[crs$sample,][crs$dataset[crs$sample,]$R01_Event=="0",]$time_Stamp)),
+    summary(na.omit(crs$dataset[crs$sample,][crs$dataset[crs$sample,]$R01_Event=="1",]$time_Stamp)))
+
+# Sort the entries.
+
+ord <- order(ds[1,], decreasing=TRUE)
+
+# Plot the data.
+
+bp <-  barplot2(ds[,ord], beside=TRUE, ylab="Frequency", xlab="time_Stamp", ylim=c(0, 18613), col=colorspace::rainbow_hcl(3))
+
+# Add the actual frequencies.
+
+text(bp, ds[,ord]+620, ds[,ord])
+
+# Add a legend to the plot.
+
+legend("topright", bty="n", c("All","0","1"),  fill=colorspace::rainbow_hcl(3))
+
+# Add a title to the plot.
+
+title(main="Distribution of time_Stamp (sample)\nby R01_Event",
+    sub=paste("Rattle", format(Sys.time(), "%Y-%b-%d %H:%M:%S"), Sys.info()["user"]))
 
 # Perform Test 
 
@@ -137,9 +164,6 @@ library(fBasics, quietly=TRUE)
 # Perform the test.
 
 ks2Test(na.omit(train[train[["R01_Event"]] == "0", "Offerid"]), na.omit(train[train[["R01_Event"]] == "1", "Offerid"]))
-
-
-
 
 
 #plot the response vs predictors
