@@ -34,21 +34,20 @@ is.na(Monthly.Spend)
 
 # The following variable selections have been noted.
 
-input <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
-     "Monthly.Income", "Number_of_logins", "Id", "Offerid",
-     "Offer.time_stamp", "Merchant")
+crs$input <- c("Number.of.Bank.Accounts", "Monthly.Spend", "Monthly.Income", "Number_of_logins",
+     "Id", "Offerid", "Merchant", "Offer.time_Stamp",
+     "time_Stamp")
 
-numeric <- c("Number_of_logins", "Id", "Offerid")
+crs$numeric <- c("Number.of.Bank.Accounts", "Monthly.Spend", "Monthly.Income", "Number_of_logins",
+     "Id", "Offerid", "Offer.time_Stamp")
 
-categoric <- c("Userid", "Profile_creation_time", "Number.of.Bank.Accounts", "Monthly.Spend",
-     "Monthly.Income", "Offer.time_stamp", "Merchant")
+crs$categoric <- c("Merchant", "time_Stamp")
 
-target  <- "Event"
-risk    <- NULL
-ident   <- NULL
-ignore  <- NULL
-weights <- NULL
-
+crs$target  <- "R01_Event"
+crs$risk    <- NULL
+crs$ident   <- NULL
+crs$ignore  <- c("Userid", "Profile_creation_time", "Offer.time_stamp", "Event")
+crs$weights <- NULL
 
 library(Hmisc, quietly=TRUE)
 
@@ -61,7 +60,7 @@ summary(mint[train, c(input, risk, target)])
 
 # Transform into a numeric.
 
-  train[["TNM_Monthly.Spend"]] <- as.numeric(train[["Monthly.Spend"]])
+train[["TNM_Monthly.Spend"]] <- as.numeric(train[["Monthly.Spend"]])
 
 # Generate a correlation plot for the variables. 
 
@@ -149,21 +148,17 @@ plot(Event~I(Number_of_logins^2))
 plot(Event~Number_of_logins)
 # Regression model 
 
-# Build a Regression model.
-fit = lm(formula = Event ~ Number_of_logins * Offerid*Number.of.Bank.Accounts, data = train)
+# Build a  logisticRegression model.
 
 # Confidence intervals for the model
 confint(fit)
 
 
-fit = lm(formula = Event ~ Number_of_logins * Offerid, data = train)
 
 
 
 fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
 
-Call:
-lm(formula = Event ~ Number_of_logins * Offerid, data = train)
 
 
 
@@ -195,8 +190,59 @@ cat("\n")
 # ... and predict data on validation data-set
 prediction = predict(fit,validate, type = "response")
 
+#...ROC plots
+ prob = predict(fit5,type = c("response"))
+ g = roc(Event~prob, data = validate)
+ plot(g)
+ 
+ 
+ 
+ # Evaluate model performance. 
 
-# ----- Predict submission dataset ---------------------------------------------
+# ROC Curve: requires the ROCR package.
+
+library(ROCR)
+
+# ROC Curve: requires the ggplot2 package.
+
+library(ggplot2, quietly=TRUE)
+
+# Generate an ROC Curve for the glm model on mint2.csv [validate].
+
+crs$pr <- predict(crs$glm, type="response", newdata=crs$dataset[crs$validate, c(crs$input, crs$target)])
+
+# Remove observations with missing target.
+
+no.miss   <- na.omit(crs$dataset[crs$validate, c(crs$input, crs$target)]$R01_Event)
+miss.list <- attr(no.miss, "na.action")
+attributes(no.miss) <- NULL
+
+
+pe <- performance(pred, "tpr", "fpr")
+au <- performance(pred, "auc")@y.values[[1]]
+pd <- data.frame(fpr=unlist(pe@x.values), tpr=unlist(pe@y.values))
+p <- ggplot(pd, aes(x=fpr, y=tpr))
+p <- p + geom_line(colour="red")
+p <- p + xlab("False Positive Rate") + ylab("True Positive Rate")
+p <- p + ggtitle("ROC Curve Linear mint2.csv [validate] R01_Event")
+p <- p + theme(plot.title=element_text(size=10))
+p <- p + geom_line(data=data.frame(), aes(x=c(0,1), y=c(0,1)), colour="grey")
+p <- p + annotate("text", x=0.50, y=0.00, hjust=0, vjust=0, size=5,
+                   label=paste("AUC =", round(au, 2)))
+print(p)
+
+# ----- Predict validate dataset ---------------------------------------------
+# Calculate the area under the curve for the plot.
+
+
+# Remove observations with missing target.
+
+no.miss   <- na.omit(crs$dataset[crs$validate, c(crs$input, crs$target)]$R01_Event)
+miss.list <- attr(no.miss, "na.action")
+attributes(no.miss) <- NULL
+pred <- prediction(crs$pr[-miss.list], no.miss)
+performance(pred, "auc")
+
 
 submissionData = data.frame(ID = validate$Userid, Event = prediction)
 submissionFile <- paste0("glm", format(Sys.time(), "%Y-%m-%d-%H:%M:%S"), ".csv")
