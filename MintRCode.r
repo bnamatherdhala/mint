@@ -174,6 +174,8 @@ glm <- glm(R01_Event ~ .,
 # Generate a textual view of the Linear model.
 
 print(summary(glm))
+
+
 cat(sprintf("Log likelihood: %.3f (%d df)\n",
             logLik(glm)[1],
             attr(logLik(glm), "df")))
@@ -190,8 +192,17 @@ print(anova(crs$glm, test="Chisq"))
 cat("\n")
 
 # Time taken: 6.66 secs
+-------------------------------------------------------------
+  library(pROC)
+> g = roc(Event~prob, data = train2)
+> plot(g)
 
+Call:
+  roc.formula(formula = Event ~ prob, data = train2)
 
+Data: prob in 37392 controls (Event 0) < 2608 cases (Event 1).
+Area under the curve: 0.6464
+--------------------------------------------------------------------------
 # ... and predict data on validation data-set
 prediction = predict(fit,validate, type = "response")
 
