@@ -95,7 +95,7 @@ print(cor)
 
 corrplot(crs$cor, mar=c(0,0,1,0))
 title(main="Correlation mint.csv using Pearson",
-    sub=paste("Rattle", format(Sys.time(), "%Y-%b-%d %H:%M:%S"), Sys.info()["user"]))
+    sub=paste("Bharat", format(Sys.time(), "%Y-%b-%d %H:%M:%S"), Sys.info()["user"]))
 
 
 # Transform variables by rescaling. 
@@ -153,7 +153,7 @@ legend("topright", bty="n", c("All","0","1"),  fill=colorspace::rainbow_hcl(3))
 # Add a title to the plot.
 
 title(main="Distribution of time_Stamp (sample)\nby R01_Event",
-    sub=paste("Rattle", format(Sys.time(), "%Y-%b-%d %H:%M:%S"), Sys.info()["user"]))
+    sub=paste("Bharat", format(Sys.time(), "%Y-%b-%d %H:%M:%S"), Sys.info()["user"]))
 
 # Perform Test 
 
