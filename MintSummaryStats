@@ -185,26 +185,93 @@ head(pred)
 
 
 Call:
-lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
-    I(Offerid^2) + Monthly.Spend, data = train2)
+Summary of the Logistic Regression model (built using glm):
 
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.17848 -0.08397 -0.06596 -0.03820  1.04885 
+Call:
+glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
+    data = crs$dataset[crs$train, c(crs$input, crs$target)])
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.3998  -0.4076  -0.3143  -0.2363   3.7055  
 
 Coefficients:
-                        Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            1.315e+00  1.847e-02  71.200  < 2e-16 ***
-Number_of_logins      -4.595e-04  2.567e-05 -17.901  < 2e-16 ***
-I(Number_of_logins^2)  5.669e-07  5.234e-08  10.831  < 2e-16 ***
-I(Offerid^2)          -1.072e-10  9.273e-12 -11.561  < 2e-16 ***
-Monthly.Spend         -1.119e-06  1.520e-07  -7.363 1.83e-13 ***
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       1.667e+02  5.905e+02   0.282 0.777767    
+Number.of.Bank.Accounts          -2.093e-02  4.030e-02  -0.519 0.603495    
+Monthly.Spend                    -3.045e-05  6.277e-06  -4.852 1.22e-06 ***
+Monthly.Income                    1.182e-06  4.041e-07   2.924 0.003454 ** 
+Number_of_logins                 -5.898e-03  3.808e-04 -15.487  < 2e-16 ***
+Id                               -1.611e-08  8.347e-10 -19.294  < 2e-16 ***
+Offerid                          -2.399e-04  6.675e-05  -3.594 0.000326 ***
+MerchantCapital One 360           4.699e-02  2.407e-01   0.195 0.845253    
+MerchantChase                    -3.635e-01  1.042e-01  -3.488 0.000487 ***
+MerchantChoose Energy             8.571e-01  2.043e-01   4.196 2.72e-05 ***
+MerchantCiti                     -4.638e-01  1.975e-01  -2.348 0.018854 *  
+Merchantctg.discovery.intuit.com  1.275e+00  2.153e-01   5.923 3.17e-09 ***
+MerchantEfinancial               -1.298e+00  7.253e-01  -1.789 0.073574 .  
+MerchantFidelity                 -5.728e-02  1.272e-01  -0.450 0.652442    
+MerchantFutureAdvisor            -1.166e-01  1.392e-01  -0.837 0.402340    
+MerchantInsWeb                   -1.690e+00  6.474e-01  -2.610 0.009052 ** 
+MerchantLending Club              5.790e-01  1.203e-01   4.815 1.47e-06 ***
+MerchantLevanto                   4.291e-01  2.628e-01   1.633 0.102545    
+MerchantMotif                    -1.283e+01  8.827e+02  -0.015 0.988400    
+MerchantMotif Investing          -1.214e-01  1.108e-01  -1.096 0.273135    
+MerchantPersonal Capital         -7.454e-01  3.122e-01  -2.388 0.016936 *  
+MerchantProgressive              -2.464e-01  2.377e-01  -1.037 0.299932    
+MerchantProgrexion               -9.357e-01  2.768e-01  -3.380 0.000724 ***
+MerchantQuicken Loans            -7.384e-01  2.652e-01  -2.785 0.005356 ** 
+MerchantQuinstreet               -1.246e+01  1.576e+02  -0.079 0.936961    
+MerchantRate Supermarket         -8.333e-01  3.256e-01  -2.560 0.010481 *  
+MerchantRateSuperMarket.ca        1.632e+01  2.712e+02   0.060 0.952017    
+MerchantScotiabank                4.869e+00  7.404e-01   6.576 4.82e-11 ***
+MerchantWealthfront              -2.219e-01  1.949e-01  -1.138 0.254939    
+Offer.time_Stamp                 -7.750e-06  2.930e-05  -0.264 0.791396    
+time_StampPM                      5.748e-02  4.896e-02   1.174 0.240375    
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-Residual standard error: 0.245 on 39995 degrees of freedom
-Multiple R-squared:  0.01552,  Adjusted R-squared:  0.01542 
-F-statistic: 157.6 on 4 and 39995 DF,  p-value: < 2.2e-16
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 14172  on 28507  degrees of freedom
+Residual deviance: 12964  on 28477  degrees of freedom
+AIC: 13026
+
+Number of Fisher Scoring iterations: 13
+
+Log likelihood: -6481.907 (31 df)
+Null/Residual deviance difference: 1208.554 (30 df)
+Chi-square p-value: 0.00000000
+Pseudo R-Square (optimistic): 0.24001357
+
+==== ANOVA ====
+
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: R01_Event
+
+Terms added sequentially (first to last)
+
+
+                        Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+NULL                                    28507      14172              
+Number.of.Bank.Accounts  1     6.83     28506      14166  0.008954 ** 
+Monthly.Spend            1    89.27     28505      14076 < 2.2e-16 ***
+Monthly.Income           1     0.00     28504      14076  0.972394    
+Number_of_logins         1   262.24     28503      13814 < 2.2e-16 ***
+Id                       1   404.95     28502      13409 < 2.2e-16 ***
+Offerid                  1    41.29     28501      13368 1.315e-10 ***
+Merchant                22   402.51     28479      12965 < 2.2e-16 ***
+Offer.time_Stamp         1     0.08     28478      12965  0.782524    
+time_Stamp               1     1.38     28477      12964  0.239991    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Time taken: 4.64 secs
+
+Rattle timestamp: 2015-11-09 12:14:12 bnamatherdhala
 -------------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
