@@ -174,17 +174,14 @@ plot(Event~Number_of_logins)
 
 # Build a  logisticRegression model.
 
-# Confidence intervals for the model
-confint(fit)
-
-
-
-
-
 fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
 
 
-
+Call:
+glm(formula = Event ~ Monthly.Spend + Number.of.Bank.Accounts + 
+    Monthly.Income + Merchant + Offer.time_Stamp + Offerid + 
+    time_Stamp + Number_of_logins, family = binomial(link = "logit"), 
+    data = t4)
 
 glm <- glm(R01_Event ~ .,
     data=crs$dataset[crs$train, c(crs$input, crs$target)],
@@ -220,7 +217,7 @@ Call:
   roc.formula(formula = Event ~ prob, data = train2)
 
 Data: prob in 37392 controls (Event 0) < 2608 cases (Event 1).
-Area under the curve: 0.6464
+Area under the curve: 0.7464
 --------------------------------------------------------------------------
 # ... and predict data on validation data-set
 prediction = predict(fit,validate, type = "response")
