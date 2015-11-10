@@ -112,6 +112,7 @@ train[["R01_Event"]] <- train[["Event"]]
 
 
 range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+train$Evenet = range01(train$Event)
 R01_Event = range(Event)
 
 Event1 = range01(Event)
@@ -174,14 +175,11 @@ plot(Event~Number_of_logins)
 
 # Build a  logisticRegression model.
 
-fit = glm(Event1~Number_of_logins,data = train, family=binomial(link="logit"))
+glm(formula = Event ~ Offerid + Number.of.Bank.Accounts + Merchant + 
+    Monthly.Spend + Monthly.Income + Number_of_logins + time_Stamp + 
+    Offer.time_Stamp, family = binomial(link = "logit"), data = train4)
 
 
-Call:
-glm(formula = Event ~ Monthly.Spend + Number.of.Bank.Accounts + 
-    Monthly.Income + Merchant + Offer.time_Stamp + Offerid + 
-    time_Stamp + Number_of_logins, family = binomial(link = "logit"), 
-    data = t4)
 
 glm <- glm(R01_Event ~ .,
     data=crs$dataset[crs$train, c(crs$input, crs$target)],
@@ -207,7 +205,69 @@ cat('\n==== ANOVA ====\n\n')
 print(anova(crs$glm, test="Chisq"))
 cat("\n")
 
-# Time taken: 6.66 secs
+#prediction
+
+glm.probs = pedict(fit, type = "response")
+Error: could not find function "pedict"
+> glm.probs = predict(fit, type = "response")
+> glm.pred = ifelse(glm.probs >0.5, "Up", "Down")
+> summary(glm.pred)
+   Length     Class      Mode 
+    40000 character character 
+> head(glm.pred)
+ 23089  30170  38960  44603  22941  58106 
+"Down" "Down" "Down" "Down" "Down" "Down" 
+> attach(train)
+> table(glm.pred, Event)
+        Event
+glm.pred     0     1
+    Down 37391  2554
+    Up       3    52
+> glm.probs[1:10]
+     23089      30170      38960      44603      22941      58106      49307 
+0.11112800 0.05067051 0.06098227 0.12098905 0.02138065 0.01039575 0.05199076 
+     57415      33165      70120 
+0.06576790 0.07703461 0.07439343 
+> mean(glm.pred ==Event)
+[1] 0
+
+# The recall or true positive rate (TP) is the proportion of positive cases that were correctly identified, 
+> 52/(52+3)
+[1] 0.9454545
+
+#The accuracy (AC) is the proportion of the total number of predictions that were correct
+> (37391+ 52)/(37391 + 3+ 2554+52)
+[1] 0.936075
+
+#Finally, precision (P) is the proportion of the predicted positive cases that were correct
+
+
+# CIs using profiled log-likelihood
+
+
+confint(fit5)
+
+
+## CIs using standard errors
+
+confint.default(fit5)
+
+## wald Test 
+> library(aod)
+> wald.test(b = coef(fit5), Sigma = vcov(fit5), Terms = 2:3)
+Wald test:
+----------
+
+Chi-squared test:
+X2 = 30.0, df = 2, P(> X2) = 3.1e-07
+
+## odds ratios only
+exp(coef(fit5))
+
+## odds ratios and 95% CI
+> exp(cbind(OR = coef(fit5), confint(fit5)))
+
+
 -------------------------------------------------------------
   library(pROC)
 > g = roc(Event~prob, data = train2)
