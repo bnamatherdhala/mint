@@ -150,398 +150,7 @@ Test Results:
 -----------------------------------------------------------------------------------------------
  
 
-------------------------------------------------------------------------------------------------------------------------
-
-fit3 = lm(formula = Event ~ Number_of_logins+I(Number_of_logins^2) + I(Offerid^2), data = train)
-> summary(fit3)
-
-Call:
-lm(formula = Event ~ Number_of_logins + I(Number_of_logins^2) + 
-    I(Offerid^2), data = train)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.17292 -0.08387 -0.06676 -0.03928  1.00289 
-
-Coefficients:
-                        Estimate Std. Error t value Pr(>|t|)    
-(Intercept)            1.307e+00  1.845e-02   70.83   <2e-16 ***
-Number_of_logins      -4.702e-04  2.564e-05  -18.34   <2e-16 ***
-I(Number_of_logins^2)  5.809e-07  5.234e-08   11.10   <2e-16 ***
-I(Offerid^2)          -1.052e-10  9.275e-12  -11.34   <2e-16 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.2451 on 39996 degrees of freedom
-Multiple R-squared:  0.01418,  Adjusted R-squared:  0.01411 
-F-statistic: 191.8 on 3 and 39996 DF,  p-value: < 2.2e-16
-
-pred =   predict(fit, data.frame(Event , interval = "prediction")
-+ )
-head(pred)
-       1        2        3        4        5        6 
-1.103901 1.060669 1.047889 1.065479 1.058924 1.022904 
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-Call:
-Summary of the Logistic Regression model (built using glm):
-
-Call:
-glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
-    data = crs$dataset[crs$train, c(crs$input, crs$target)])
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--2.3998  -0.4076  -0.3143  -0.2363   3.7055  
-
-Coefficients:
-                                   Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                       1.667e+02  5.905e+02   0.282 0.777767    
-Number.of.Bank.Accounts          -2.093e-02  4.030e-02  -0.519 0.603495    
-Monthly.Spend                    -3.045e-05  6.277e-06  -4.852 1.22e-06 ***
-Monthly.Income                    1.182e-06  4.041e-07   2.924 0.003454 ** 
-Number_of_logins                 -5.898e-03  3.808e-04 -15.487  < 2e-16 ***
-Id                               -1.611e-08  8.347e-10 -19.294  < 2e-16 ***
-Offerid                          -2.399e-04  6.675e-05  -3.594 0.000326 ***
-MerchantCapital One 360           4.699e-02  2.407e-01   0.195 0.845253    
-MerchantChase                    -3.635e-01  1.042e-01  -3.488 0.000487 ***
-MerchantChoose Energy             8.571e-01  2.043e-01   4.196 2.72e-05 ***
-MerchantCiti                     -4.638e-01  1.975e-01  -2.348 0.018854 *  
-Merchantctg.discovery.intuit.com  1.275e+00  2.153e-01   5.923 3.17e-09 ***
-MerchantEfinancial               -1.298e+00  7.253e-01  -1.789 0.073574 .  
-MerchantFidelity                 -5.728e-02  1.272e-01  -0.450 0.652442    
-MerchantFutureAdvisor            -1.166e-01  1.392e-01  -0.837 0.402340    
-MerchantInsWeb                   -1.690e+00  6.474e-01  -2.610 0.009052 ** 
-MerchantLending Club              5.790e-01  1.203e-01   4.815 1.47e-06 ***
-MerchantLevanto                   4.291e-01  2.628e-01   1.633 0.102545    
-MerchantMotif                    -1.283e+01  8.827e+02  -0.015 0.988400    
-MerchantMotif Investing          -1.214e-01  1.108e-01  -1.096 0.273135    
-MerchantPersonal Capital         -7.454e-01  3.122e-01  -2.388 0.016936 *  
-MerchantProgressive              -2.464e-01  2.377e-01  -1.037 0.299932    
-MerchantProgrexion               -9.357e-01  2.768e-01  -3.380 0.000724 ***
-MerchantQuicken Loans            -7.384e-01  2.652e-01  -2.785 0.005356 ** 
-MerchantQuinstreet               -1.246e+01  1.576e+02  -0.079 0.936961    
-MerchantRate Supermarket         -8.333e-01  3.256e-01  -2.560 0.010481 *  
-MerchantRateSuperMarket.ca        1.632e+01  2.712e+02   0.060 0.952017    
-MerchantScotiabank                4.869e+00  7.404e-01   6.576 4.82e-11 ***
-MerchantWealthfront              -2.219e-01  1.949e-01  -1.138 0.254939    
-Offer.time_Stamp                 -7.750e-06  2.930e-05  -0.264 0.791396    
-time_StampPM                      5.748e-02  4.896e-02   1.174 0.240375    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 14172  on 28507  degrees of freedom
-Residual deviance: 12964  on 28477  degrees of freedom
-AIC: 13026
-
-Number of Fisher Scoring iterations: 13
-
-Log likelihood: -6481.907 (31 df)
-Null/Residual deviance difference: 1208.554 (30 df)
-Chi-square p-value: 0.00000000
-Pseudo R-Square (optimistic): 0.24001357
-
-==== ANOVA ====
-
-Analysis of Deviance Table
-
-Model: binomial, link: logit
-
-Response: R01_Event
-
-Terms added sequentially (first to last)
-
-
-                        Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
-NULL                                    28507      14172              
-Number.of.Bank.Accounts  1     6.83     28506      14166  0.008954 ** 
-Monthly.Spend            1    89.27     28505      14076 < 2.2e-16 ***
-Monthly.Income           1     0.00     28504      14076  0.972394    
-Number_of_logins         1   262.24     28503      13814 < 2.2e-16 ***
-Id                       1   404.95     28502      13409 < 2.2e-16 ***
-Offerid                  1    41.29     28501      13368 1.315e-10 ***
-Merchant                22   402.51     28479      12965 < 2.2e-16 ***
-Offer.time_Stamp         1     0.08     28478      12965  0.782524    
-time_Stamp               1     1.38     28477      12964  0.239991    
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Time taken: 4.64 secs
-
-
--------------------------------------------------------------------------------------
-
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-Call:
-lm(formula = Event ~ Number_of_logins * Offerid, data = train)
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.21818 -0.07625 -0.06795 -0.05110  1.10681 
-
-Coefficients:
-                                Estimate      Std. Error t value Pr(>|t|)    
-(Intercept)               1.748444667026  0.048917540960  35.743  < 2e-16 ***
-Number_of_logins         -0.002806797974  0.000369696262  -7.592 3.21e-14 ***
-Offerid                  -0.000014866356  0.000001100164 -13.513  < 2e-16 ***
-Number_of_logins:Offerid  0.000000058143  0.000000008307   6.999 2.62e-12 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.2477 on 39996 degrees of freedom
-Multiple R-squared:  0.01322,   Adjusted R-squared:  0.01315 
-F-statistic: 178.7 on 3 and 39996 DF,  p-value: < 2.2e-16
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
-
-Call:
-lm(formula = Event ~ Number_of_logins * Offerid * Number.of.Bank.Accounts, 
-    data = train)
-
-Residuals:
-     Min       1Q   Median       3Q      Max 
--0.28318 -0.07495 -0.06529 -0.04941  1.06633 
-
-Coefficients:
-                                                   Estimate Std. Error t value Pr(>|t|)    
-(Intercept)                                       2.042e+00  9.256e-02  22.066  < 2e-16 ***
-Number_of_logins                                 -5.149e-03  6.602e-04  -7.800 6.35e-15 ***
-Offerid                                          -2.125e-05  2.080e-06 -10.216  < 2e-16 ***
-Number.of.Bank.Accounts                          -4.038e-01  8.550e-02  -4.723 2.33e-06 ***
-Number_of_logins:Offerid                          1.097e-07  1.480e-08   7.411 1.28e-13 ***
-Number_of_logins:Number.of.Bank.Accounts          3.109e-03  6.267e-04   4.961 7.03e-07 ***
-Offerid:Number.of.Bank.Accounts                   8.768e-06  1.921e-06   4.564 5.02e-06 ***
-Number_of_logins:Offerid:Number.of.Bank.Accounts -6.839e-08  1.406e-08  -4.866 1.15e-06 ***
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-Residual standard error: 0.2452 on 39992 degrees of freedom
-Multiple R-squared:  0.0131,    Adjusted R-squared:  0.01293 
-F-statistic: 75.85 on 7 and 39992 DF,  p-value: < 2.2e-16
-
-
-> confint(fit)
-                                                         2.5 %        97.5 %
-(Intercept)                                       1.861023e+00  2.223868e+00
-Number_of_logins                                 -6.443441e-03 -3.855424e-03
-Offerid                                          -2.532291e-05 -1.717037e-05
-Number.of.Bank.Accounts                          -5.713748e-01 -2.362279e-01
-Number_of_logins:Offerid                          8.068623e-08  1.387129e-07
-Number_of_logins:Number.of.Bank.Accounts          1.880821e-03  4.337335e-03
-Offerid:Number.of.Bank.Accounts                   5.003041e-06  1.253353e-05
-Number_of_logins:Offerid:Number.of.Bank.Accounts -9.593592e-08 -4.083838e-08
-
- pred =   predict(fit, data.frame(Event = c(5,10)), interval = "confidence")
-Warning message:
-'newdata' had 2 rows but variables found have 40000 rows 
-> summary(pred)
-      fit              lwr              upr        
- Min.   :0.8569   Min.   :0.7854   Min.   :0.9283  
- 1st Qu.:1.0540   1st Qu.:1.0507   1st Qu.:1.0581  
- Median :1.0673   Median :1.0639   Median :1.0708  
- Mean   :1.0652   Mean   :1.0601   Mean   :1.0702  
- 3rd Qu.:1.0762   3rd Qu.:1.0725   3rd Qu.:1.0799  
- Max.   :1.2832   Max.   :1.2470   Max.   :1.3194  
-> head(pred)
-       fit      lwr      upr
-1 1.103901 1.098770 1.109032
-2 1.060669 1.054654 1.066684
-3 1.047889 1.044818 1.050960
-4 1.065479 1.062995 1.067964
-5 1.058924 1.056233 1.061615
-6 1.022904 1.011991 1.033818
-
-
- -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     
-summary(fit6)
-
-Call:
-glm(formula = Event ~ Offerid + Number.of.Bank.Accounts + Merchant * 
-    Monthly.Income + Monthly.Spend + Monthly.Income, family = binomial(link = "logit"), 
-    data = train2)
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--1.3018  -0.3724  -0.3387  -0.2946   3.6289  
-
-                                                  Estimate Std. Error z value Pr(>|z|)    
-(Intercept)                                      1.038e+01  2.547e+00   4.075 4.61e-05 ***
-Offerid                                         -2.908e-04  5.648e-05  -5.147 2.64e-07 ***
-Number.of.Bank.Accounts                          5.710e-02  3.668e-02   1.557 0.119519    
-MerchantCapital One 360                          8.259e-01  3.119e-01   2.648 0.008096 ** 
-MerchantChase                                   -5.641e-02  1.224e-01  -0.461 0.644935    
-MerchantChoose Energy                            6.290e-01  2.257e-01   2.786 0.005330 ** 
-MerchantCiti                                     4.051e-01  2.727e-01   1.486 0.137389    
-Merchantctg.discovery.intuit.com                 1.475e+00  3.839e-01   3.842 0.000122 ***
-MerchantEfinancial                              -1.550e+00  1.108e+00  -1.400 0.161635    
-MerchantFidelity                                 1.191e-01  1.375e-01   0.866 0.386592    
-MerchantFutureAdvisor                            3.582e-02  1.530e-01   0.234 0.814935    
-MerchantInsWeb                                  -1.903e+00  5.540e-01  -3.435 0.000593 ***
-MerchantLending Club                             1.270e+00  1.499e-01   8.477  < 2e-16 ***
-MerchantLevanto                                  6.159e-01  2.853e-01   2.159 0.030874 *  
-MerchantMotif                                   -1.861e+01  1.688e+04  -0.001 0.999120    
-MerchantMotif Investing                          1.237e-01  1.245e-01   0.994 0.320216    
-MerchantPersonal Capital                        -1.429e+00  3.711e-01  -3.849 0.000119 ***
-MerchantProgressive                             -1.771e-02  2.204e-01  -0.080 0.935941    
-MerchantProgrexion                              -1.105e+00  2.655e-01  -4.162 3.15e-05 ***
-MerchantQuicken Loans                           -4.656e-01  2.785e-01  -1.672 0.094556 .  
-MerchantQuinstreet                              -1.933e+01  6.364e+03  -0.003 0.997577    
-MerchantRate Supermarket                        -9.846e-01  4.269e-01  -2.307 0.021083 *  
-MerchantRateSuperMarket.ca                       2.370e+01  1.893e+04   0.001 0.999001    
-MerchantScotiabank                               2.771e+00  7.733e-01   3.584 0.000339 ***
-MerchantWealthfront                             -5.892e-01  2.101e-01  -2.804 0.005043 ** 
-Monthly.Income                                  -9.046e-06  9.512e-06  -0.951 0.341598    
-Monthly.Spend                                   -3.449e-05  5.899e-06  -5.846 5.02e-09 ***
-MerchantCapital One 360:Monthly.Income          -4.029e-05  2.474e-05  -1.628 0.103473    
-MerchantChase:Monthly.Income                    -4.016e-06  9.970e-06  -0.403 0.687043    
-MerchantChoose Energy:Monthly.Income             1.633e-05  1.195e-05   1.367 0.171747    
-MerchantCiti:Monthly.Income                     -4.648e-05  2.369e-05  -1.962 0.049788 *  
-Merchantctg.discovery.intuit.com:Monthly.Income -1.788e-04  1.160e-04  -1.541 0.123289    
-MerchantEfinancial:Monthly.Income                2.249e-05  3.879e-05   0.580 0.561987    
-MerchantFidelity:Monthly.Income                  6.194e-06  9.692e-06   0.639 0.522758    
-MerchantFutureAdvisor:Monthly.Income             3.413e-06  1.019e-05   0.335 0.737597    
-MerchantInsWeb:Monthly.Income                    9.910e-06  9.619e-06   1.030 0.302880    
-MerchantLending Club:Monthly.Income             -3.818e-05  1.268e-05  -3.010 0.002610 ** 
-MerchantLevanto:Monthly.Income                   5.450e-06  1.139e-05   0.478 0.632342    
-MerchantMotif:Monthly.Income                            NA         NA      NA       NA    
-MerchantMotif Investing:Monthly.Income           4.952e-06  9.672e-06   0.512 0.608659    
-MerchantPersonal Capital:Monthly.Income          1.174e-05  9.597e-06   1.223 0.221242    
-MerchantProgressive:Monthly.Income               7.653e-06  1.103e-05   0.694 0.487606    
-MerchantProgrexion:Monthly.Income                4.681e-05  1.418e-05   3.303 0.000958 ***
-MerchantQuicken Loans:Monthly.Income             1.044e-06  1.265e-05   0.083 0.934241    
-MerchantQuinstreet:Monthly.Income                1.958e-05  9.835e-02   0.000 0.999841    
-MerchantRate Supermarket:Monthly.Income          1.506e-05  1.636e-05   0.921 0.357101    
-MerchantRateSuperMarket.ca:Monthly.Income        1.044e-05  6.610e-01   0.000 0.999987    
-MerchantScotiabank:Monthly.Income                3.002e-01  3.057e+00   0.098 0.921775    
-MerchantWealthfront:Monthly.Income               1.032e-05  9.523e-06   1.084 0.278522    
----
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 19283  on 39999  degrees of freedom
-Residual deviance: 18320  on 39952  degrees of freedom
-AIC: 18416
-
-Number of Fisher Scoring iterations: 20
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-Call:
-glm(formula = R01_Event ~ ., family = binomial(link = "logit"), 
-    data = crs$dataset[crs$train, c(crs$input, crs$target)])
-
-Deviance Residuals: 
-    Min       1Q   Median       3Q      Max  
--2.4828  -0.3999  -0.3410  -0.2664   3.6912  
-
-Coefficients:
-                                      Estimate    Std. Error z value Pr(>|z|)
-(Intercept)                        9.618770138   2.699575207   3.563 0.000367
-Number_of_logins                  -0.005795558   0.000332419 -17.435  < 2e-16
-Offerid                           -0.000261012   0.000059891  -4.358 1.31e-05
-MerchantCapital One 360            0.162857108   0.208017815   0.783 0.433686
-MerchantChase                     -0.392051055   0.093382116  -4.198 2.69e-05
-MerchantChoose Energy              0.739526065   0.189946348   3.893 9.89e-05
-MerchantCiti                      -0.378188112   0.174371005  -2.169 0.030093
-Merchantctg.discovery.intuit.com   1.456741169   0.187810325   7.756 8.73e-15
-MerchantEfinancial                -1.283786827   0.719632599  -1.784 0.074432
-MerchantFidelity                  -0.212013631   0.113737771  -1.864 0.062314
-MerchantFutureAdvisor             -0.169284510   0.125401030  -1.350 0.177034
-MerchantInsWeb                    -1.804278760   0.580290785  -3.109 0.001876
-MerchantLending Club               0.635077407   0.107774429   5.893 3.80e-09
-MerchantLevanto                    0.490016848   0.219864542   2.229 0.025832
-MerchantMotif                    -12.311665203 624.193834200  -0.020 0.984263
-MerchantMotif Investing           -0.075424812   0.097766374  -0.771 0.440422
-MerchantPersonal Capital          -0.879732945   0.283537096  -3.103 0.001918
-MerchantProgressive               -0.205368587   0.212827669  -0.965 0.334569
-MerchantProgrexion                -0.831284165   0.243228438  -3.418 0.000632
-MerchantQuicken Loans             -0.813408731   0.235957838  -3.447 0.000566
-MerchantQuinstreet               -12.366184163 152.385274020  -0.081 0.935322
-MerchantRate Supermarket          -0.973040415   0.307575836  -3.164 0.001558
-MerchantRateSuperMarket.ca        16.639354593 262.476762103   0.063 0.949453
-MerchantScotiabank                 5.010248647   0.735573780   6.811 9.67e-12
-MerchantWealthfront               -0.235697725   0.175212538  -1.345 0.178557
-TNM_Monthly.Income                 0.000112539   0.000038890   2.894 0.003806
-TNM_Monthly.Spend                 -0.000225739   0.000054963  -4.107 4.01e-05
-TNM_Number.of.Bank.Accounts        0.030769494   0.039271113   0.784 0.433325
-TNM_Offer.time_stamp              -0.000019170   0.000006214  -3.085 0.002036
-                                    
-(Intercept)                      ***
-Number_of_logins                 ***
-Offerid                          ***
-MerchantCapital One 360             
-MerchantChase                    ***
-MerchantChoose Energy            ***
-MerchantCiti                     *  
-Merchantctg.discovery.intuit.com ***
-MerchantEfinancial               .  
-MerchantFidelity                 .  
-MerchantFutureAdvisor               
-MerchantInsWeb                   ** 
-MerchantLending Club             ***
-MerchantLevanto                  *  
-MerchantMotif                       
-MerchantMotif Investing             
-MerchantPersonal Capital         ** 
-MerchantProgressive                 
-MerchantProgrexion               ***
-MerchantQuicken Loans            ***
-MerchantQuinstreet                  
-MerchantRate Supermarket         ** 
-MerchantRateSuperMarket.ca          
-MerchantScotiabank               ***
-MerchantWealthfront                 
-TNM_Monthly.Income               ** 
-TNM_Monthly.Spend                ***
-TNM_Number.of.Bank.Accounts         
-TNM_Offer.time_stamp             ** 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-(Dispersion parameter for binomial family taken to be 1)
-
-    Null deviance: 17506  on 35635  degrees of freedom
-Residual deviance: 16475  on 35607  degrees of freedom
-AIC: 16533
-
-Number of Fisher Scoring iterations: 13
-
-Log likelihood: -8237.253 (29 df)
-Null/Residual deviance difference: 1031.019 (28 df)
-Chi-square p-value: 0.00000000
-Pseudo R-Square (optimistic): 0.21045839
-
-==== ANOVA ====
-
-Analysis of Deviance Table
-
-Model: binomial, link: logit
-
-Response: R01_Event
-
-Terms added sequentially (first to last)
-
-
-                            Df Deviance Resid. Df Resid. Dev   Pr(>Chi)    
-NULL                                        35635      17506               
-Number_of_logins             1   390.28     35634      17115  < 2.2e-16 ***
-Offerid                      1    69.13     35633      17046  < 2.2e-16 ***
-Merchant                    22   535.32     35611      16511  < 2.2e-16 ***
-TNM_Monthly.Income           1     8.18     35610      16503   0.004233 ** 
-TNM_Monthly.Spend            1    18.00     35609      16485 0.00002214 ***
-TNM_Number.of.Bank.Accounts  1     0.58     35608      16484   0.447077    
-TNM_Offer.time_stamp         1     9.53     35607      16475   0.002023 ** 
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Time taken: 6.66 secs
-
-
-ggplot(data1,aes(x = Number_of_logins, y = Event))+ geom_point(colour = 'red',size = 7)+geom_smooth(method =lm)+ ylab ("Event")+ xlab ('Number_of_logins')
-
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------------------------------
 Call:
@@ -557,6 +166,7 @@ Coefficients:
                                    Estimate Std. Error z value Pr(>|z|)    
 (Intercept)                       1.026e+01  2.540e+00   4.039 5.37e-05 ***
 Offerid                          -2.892e-04  5.633e-05  -5.134 2.84e-07 ***
+Number_of_logins                 -5.076e+00  6.077e-01   8.353  < 2e-16 ***
 Number.of.Bank.Accounts           8.380e-02  3.606e-02   2.324 0.020130 *  
 MerchantCapital One 360           3.362e-01  2.031e-01   1.655 0.097851 .  
 MerchantChase                    -1.316e-01  9.202e-02  -1.430 0.152589    
@@ -582,17 +192,57 @@ MerchantScotiabank                5.076e+00  6.077e-01   8.353  < 2e-16 ***
 MerchantWealthfront              -3.529e-01  1.912e-01  -1.845 0.064986 .  
 Monthly.Spend                    -4.487e-05  5.700e-06  -7.873 3.45e-15 ***
 Monthly.Income                   -2.406e-06  7.196e-07  -3.343 0.000828 ***
+Offer.time_Stamp                 -2.406e-06  7.196e-07  -3.343 0.391705
+time_StampPM                      5.076e+00  6.077e-01   8.353 0.238099 
 ---
-Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 (Dispersion parameter for binomial family taken to be 1)
 
-    Null deviance: 19283  on 39999  degrees of freedom
-Residual deviance: 18456  on 39973  degrees of freedom
-AIC: 18510
+    Null deviance: 19294  on 39999  degrees of freedom
+Residual deviance: 18158  on 39968  degrees of freedom
+AIC: 18222
 
 Number of Fisher Scoring iterations: 13
 
+Log likelihood: -6666.463 (30 df)
+Null/Residual deviance difference: 839.441 (29 df)
+Chi-square p-value: 0.00000000
+Pseudo R-Square (optimistic): 0.21508524
+
+==== ANOVA ====
+
+Analysis of Deviance Table
+
+Model: binomial, link: logit
+
+Response: R01_Event
+
+Terms added sequentially (first to last)
+
+
+                        Df Deviance Resid. Df Resid. Dev  Pr(>Chi)    
+NULL                                    28507      14172              
+Number.of.Bank.Accounts  1     6.83     28506      14166  0.008954 ** 
+Monthly.Spend            1    89.27     28505      14076 < 2.2e-16 ***
+Monthly.Income           1     0.00     28504      14076  0.972394    
+Number_of_logins         1   262.24     28503      13814 < 2.2e-16 ***
+Offerid                  1    57.21     28502      13757 3.917e-14 ***
+Merchant                22   421.76     28480      13335 < 2.2e-16 ***
+Offer.time_Stamp         1     0.73     28479      13334  0.391705    
+time_Stamp               1     1.39     28478      13333  0.238099    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+> prediction = predict(fit5,validate, type = "response")
+> g = roc(Event~prediction, data = validate)
+> plot(g)
+
+Call:
+roc.formula(formula = Event ~ prediction, data = validate)
+
+Data: prediction in 18740 controls (Event 1) < 1260 cases (Event 2).
+Area under the curve: 0.6747
 
 > confint(fit5)
 Waiting for profiling to be done...
@@ -624,6 +274,8 @@ MerchantScotiabank                4.040611e+00  6.507941e+00
 MerchantWealthfront              -7.407690e-01  1.080652e-02
 Monthly.Spend                    -5.624225e-05 -3.390659e-05
 Monthly.Income                   -3.912683e-06 -1.088976e-06
+Offer.time_Stamp                 -3.391153e-01  4.478251e-01
+time_Stamp                       -2.808747e+00 -6.649586e-01
 
 > exp(confint(fit5))
 Waiting for profiling to be done...
@@ -690,7 +342,72 @@ exp(fit5$coefficients)
                   Monthly.Income 
                     9.999976e-01 
 
-      
-      
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Call:
+glm(formula = Event ~ Monthly.Spend + Number.of.Bank.Accounts + 
+    Monthly.Income + Merchant + Offer.time_Stamp + I(Offerid^2) + 
+    time_Stamp + Number_of_logins + Monthly.Income * Monthly.Spend + 
+    Monthly.Income * Number_of_logins, family = binomial(link = "logit"), 
+    data = t4)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.1760  -0.3996  -0.3346  -0.2594   3.6176  
+
+Coefficients:
+                                   Estimate Std. Error z value Pr(>|z|)    
+(Intercept)                       4.113e+02  5.005e+02   0.822 0.411185    
+Monthly.Spend                    -3.855e-05  5.674e-06  -6.795 1.08e-11 ***
+Number.of.Bank.Accounts          -5.578e-02  3.396e-02  -1.643 0.100470    
+Monthly.Income                   -2.501e-06  7.413e-07  -3.374 0.000741 ***
+MerchantCapital One 360           1.852e-01  1.957e-01   0.947 0.343861    
+MerchantChase                    -4.672e-01  8.695e-02  -5.373 7.74e-08 ***
+MerchantChoose Energy             6.551e-01  1.843e-01   3.554 0.000380 ***
+MerchantCiti                     -5.687e-01  1.756e-01  -3.239 0.001199 ** 
+Merchantctg.discovery.intuit.com  1.068e+00  1.767e-01   6.043 1.51e-09 ***
+MerchantEfinancial               -7.032e-01  5.150e-01  -1.365 0.172152    
+MerchantFidelity                 -1.639e-01  1.058e-01  -1.550 0.121208    
+MerchantFutureAdvisor            -1.637e-01  1.165e-01  -1.405 0.159884    
+MerchantInsWeb                   -2.353e+00  5.002e-01  -4.705 2.54e-06 ***
+MerchantLending Club              4.854e-01  1.021e-01   4.756 1.98e-06 ***
+MerchantLevanto                   6.636e-01  2.011e-01   3.300 0.000968 ***
+MerchantMotif                    -1.228e+01  6.242e+02  -0.020 0.984308    
+MerchantMotif Investing          -1.193e-01  9.203e-02  -1.296 0.194972    
+MerchantPersonal Capital         -1.324e+00  3.216e-01  -4.117 3.84e-05 ***
+MerchantProgressive              -4.724e-01  1.981e-01  -2.384 0.017102 *  
+MerchantProgrexion               -8.569e-01  2.187e-01  -3.918 8.93e-05 ***
+MerchantQuicken Loans            -8.660e-01  2.154e-01  -4.021 5.80e-05 ***
+MerchantQuinstreet               -1.242e+01  1.626e+02  -0.076 0.939113    
+MerchantRate Supermarket         -8.739e-01  2.665e-01  -3.279 0.001042 ** 
+MerchantRateSuperMarket.ca        1.649e+01  2.767e+02   0.060 0.952475    
+MerchantScotiabank                4.280e+00  5.353e-01   7.995 1.30e-15 ***
+MerchantWealthfront              -3.740e-01  1.695e-01  -2.207 0.027339 *  
+Offer.time_Stamp                 -2.011e-05  2.483e-05  -0.810 0.417993    
+I(Offerid^2)                     -3.937e-09  6.361e-10  -6.190 6.03e-10 ***
+time_Stamp PM                     1.159e-01  4.189e-02   2.768 0.005638 ** 
+Number_of_logins                 -5.762e-03  3.395e-04 -16.969  < 2e-16 ***
+Monthly.Spend:Monthly.Income      6.785e-11  1.145e-11   5.925 3.12e-09 ***
+Monthly.Income:Number_of_logins   1.429e-08  3.406e-09   4.195 2.73e-05 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+   Null deviance: 14172  on 28507  degrees of freedom
+Residual deviance: 13333  on 28478  degrees of freedom
+AIC: 13393
+
+Number of Fisher Scoring iterations: 13
+
+> prediction = predict(fit6,validate, type = "response")
+> g = roc(Event~prediction, data = validate)
+> plot(g)
+
+Call:
+roc.formula(formula = Event ~ prediction, data = validate)
+
+Data: prediction in 18740 controls (Event 1) < 1260 cases (Event 2).
+Area under the curve: 0.7247
       
       
