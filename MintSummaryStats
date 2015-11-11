@@ -234,15 +234,79 @@ time_Stamp               1     1.39     28478      13333  0.238099
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-> prediction = predict(fit5,validate, type = "response")
+
+glm.probs = pedict(fit, type = "response")
+
+> glm.probs = predict(fit, type = "response")
+> glm.pred = ifelse(glm.probs >0.5, "Up", "Down")
+> summary(glm.pred)
+   Length     Class      Mode 
+    40000 character character 
+> head(glm.pred)
+ 23089  30170  38960  44603  22941  58106 
+"Down" "Down" "Down" "Down" "Down" "Down" 
+> attach(train)
+> table(glm.pred, Event)
+        Event
+glm.pred     0     1
+    Down 37391  2554
+    Up       3    52
+> glm.probs[1:10]
+     23089      30170      38960      44603      22941      58106      49307 
+0.11112800 0.05067051 0.06098227 0.12098905 0.02138065 0.01039575 0.05199076 
+     57415      33165      70120 
+0.06576790 0.07703461 0.07439343 
+> mean(glm.pred ==Event)
+[1] 0
+
+# The recall or true positive rate (TP) is the proportion of positive cases that were correctly identified, 
+> 52/(52+3)
+[1] 0.9454545
+
+#The accuracy (AC) is the proportion of the total number of predictions that were correct
+> (37391+ 52)/(37391 + 3+ 2554+52)
+[1] 0.936075
+
+> prediction = predict(fit5,train, type = "response")
+> g = roc(Event~prediction, data = train)
+> plot(g)
+
+Call:
+roc.formula(formula = Event ~ prediction, data = validate)
+
+Data: glm.probs in 37394 controls (Event 0) < 2606 cases (Event 1).
+Area under the curve: 0.6831
+--------------------------------------------------------------------------------------------------------
+
+# test the model with validate data set 
+Call:
+glm(formula = Event ~ Offerid + Number.of.Bank.Accounts + Merchant + 
+    Monthly.Spend + Monthly.Income + Number_of_logins + time_Stamp + 
+    Offer.time_Stamp, family = binomial(link = "logit"), data = validate)
+> glm.probs = predict(glm.fit, newdata = validate, type = "response")
+> glm.pred = ifelse(glm.probs >0.5, "Up","Down")
+> table(glm.pred, Event)
+
+> glm.probs = predict(glm.fit, newdata = validate, type = "response")
+> glm.pred = ifelse(glm.probs >0.5, "Up","Down")
+> table(glm.pred, Event)
+        Event
+glm.pred     0     1
+    Down 18723  1256
+    Up       1    20
+> 20/(21)
+[1] 0.952381
+> 20/(20+1)
+[1] 0.952381
+>  prediction = predict(glm.fit,validate, type = "response")
 > g = roc(Event~prediction, data = validate)
 > plot(g)
 
 Call:
 roc.formula(formula = Event ~ prediction, data = validate)
 
-Data: prediction in 18740 controls (Event 1) < 1260 cases (Event 2).
-Area under the curve: 0.6747
+Data: prediction in 18724 controls (Event 0) < 1276 cases (Event 1).
+Area under the curve: 0.6882
 
 > confint(fit5)
 Waiting for profiling to be done...
@@ -341,6 +405,69 @@ exp(fit5$coefficients)
                     7.026806e-01                     9.999551e-01 
                   Monthly.Income 
                     9.999976e-01 
+ 
+ library(aod)
+> wald.test(b = coef(fit5), Sigma = vcov(fit5), Terms = 2:3)
+Wald test:
+----------
+
+Chi-squared test:
+X2 = 30.0, df = 2, P(> X2) = 3.1e-07
+> ## odds ratios only
+> exp(coef(fit5))
+                     (Intercept)                          Offerid          Number.of.Bank.Accounts          MerchantCapital One 360 
+                             Inf                     9.996975e-01                     9.559606e-01                     1.125097e+00 
+                   MerchantChase            MerchantChoose Energy                     MerchantCiti Merchantctg.discovery.intuit.com 
+                    7.004988e-01                     1.962914e+00                     6.171754e-01                     3.317531e+00 
+              MerchantEfinancial                 MerchantFidelity            MerchantFutureAdvisor                   MerchantInsWeb 
+                    2.874530e-01                     8.178593e-01                     9.202549e-01                     1.390716e-01 
+            MerchantLending Club                  MerchantLevanto                    MerchantMotif          MerchantMotif Investing 
+                    1.939763e+00                     1.847036e+00                     5.167949e-06                     9.812837e-01 
+        MerchantPersonal Capital              MerchantProgressive               MerchantProgrexion            MerchantQuicken Loans 
+                    3.883671e-01                     6.880615e-01                     4.583600e-01                     4.931515e-01 
+              MerchantQuinstreet         MerchantRate Supermarket       MerchantRateSuperMarket.ca               MerchantScotiabank 
+                    4.650504e-06                     4.559998e-01                     1.708040e+07                     1.055245e+02 
+             MerchantWealthfront                    Monthly.Spend                   Monthly.Income                 Number_of_logins 
+                    6.864786e-01                     9.999702e-01                     9.999997e-01                     9.945253e-01 
+                   time_Stamp PM                 Offer.time_Stamp 
+                    1.023343e+00                     9.999639e-01 
+
+
+
+> ## odds ratios and 95% CI
+> exp(cbind(OR = coef(fit5), confint(fit5)))
+Waiting for profiling to be done...
+                                           OR         2.5 %       97.5 %
+(Intercept)                               Inf 1.607100e-106          Inf
+Offerid                          9.996975e-01  9.995861e-01 9.998102e-01
+Number.of.Bank.Accounts          9.559606e-01  8.940712e-01 1.021598e+00
+MerchantCapital One 360          1.125097e+00  7.483508e-01 1.644493e+00
+MerchantChase                    7.004988e-01  5.895897e-01 8.361223e-01
+MerchantChoose Energy            1.962914e+00  1.338466e+00 2.823057e+00
+MerchantCiti                     6.171754e-01  4.315544e-01 8.643237e-01
+Merchantctg.discovery.intuit.com 3.317531e+00  2.287219e+00 4.733990e+00
+MerchantEfinancial               2.874530e-01  4.712807e-02 9.180887e-01
+MerchantFidelity                 8.178593e-01  6.589290e-01 1.016063e+00
+MerchantFutureAdvisor            9.202549e-01  7.296203e-01 1.159493e+00
+MerchantInsWeb                   1.390716e-01  4.722314e-02 4.140529e-01
+MerchantLending Club             1.939763e+00  1.587562e+00 2.376116e+00
+MerchantLevanto                  1.847036e+00  1.196861e+00 2.758941e+00
+MerchantMotif                    5.167949e-06            NA 1.877607e+37
+MerchantMotif Investing          9.812837e-01  8.176200e-01 1.182268e+00
+MerchantPersonal Capital         3.883671e-01  2.104483e-01 6.633304e-01
+MerchantProgressive              6.880615e-01  4.612174e-01 1.028004e+00
+MerchantProgrexion               4.583600e-01  2.906314e-01 7.035948e-01
+MerchantQuicken Loans            4.931515e-01  3.182638e-01 7.556458e-01
+MerchantQuinstreet               4.650504e-06  1.027351e-25 4.712085e-03
+MerchantRate Supermarket         4.559998e-01  2.581129e-01 7.596341e-01
+MerchantRateSuperMarket.ca       1.708040e+07  1.590723e+01           NA
+MerchantScotiabank               1.055245e+02  3.737321e+01 4.420740e+02
+MerchantWealthfront              6.864786e-01  4.847032e-01 9.556062e-01
+Monthly.Spend                    9.999702e-01  9.999597e-01 9.999802e-01
+Monthly.Income                   9.999997e-01  9.999986e-01 1.000001e+00
+Number_of_logins                 9.945253e-01  9.938942e-01 9.951409e-01
+time_Stamp PM                    1.023343e+00  9.430398e-01 1.110696e+00
+Offer.time_Stamp                 9.999639e-01  9.999151e-01 1.000013e+00
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
