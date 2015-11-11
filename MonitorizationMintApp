@@ -1,8 +1,23 @@
 
-1. We need more customer information for better advertising apps 
+1. We need more customer information for better advertising our Offers ...more customer profile information
+a) get the marketing information like emails data , customer ads data see the customer behaviour of those advertisiting 
+b) get the customer information like Age, sex , profession to make offers clustured based on there actions
+c) get the information of there current offers and more specific so that we can co relate those with the offers we can advertise
 
-·        What additional factors would you think would be beneficial to look at?
 
-o   To help monetize better?
+2. get the financial predictors to make decisions with the offers .. how a predictor might increase the intuits revenue 
+or may decrease the revenue
+b) what offers are generating more revenue try to make them better as they constuite more revenue , by ranking the offers
+based on the clusrered customer profiles
+c) we need need to rank the offers based on the revenure they generate and also how popular those ads
+are and create that ranking algorithm based on above predictors  and  have the ads offered 
 
-o   To create a better user experience?
+3) Collect the A/B testing data , log data , cookie data 
+a) check whats  the size of the ads that are being placed
+b) content of the ads 
+c) fonts of the ads, colour of the ads that has high impressions and clicks
+
+
+
+
+
