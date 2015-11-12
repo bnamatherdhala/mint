@@ -279,6 +279,26 @@ Call:
 Data: prob in 37392 controls (Event 0) < 2608 cases (Event 1).
 Area under the curve: 0.7464
 --------------------------------------------------------------------------
+  ##Lets write a simple function to use LOOCV and 10 fold CV
+  > loocv=function(fit){
+    +     h=lm.influence(fit)$h
+    +     mean((residuals(fit)/(1-h))^2)
+    + }
+require(boot)
+>cv.glm(train4,fit)$delta[1]
+[1] 0.367955
+> nrow(t4)
+[1] 40000
+> loocv(fit6)---LOOCV 
+[1] 0.367955
+  
+ ------------------------------------------------------------ 
+  
+  
+  
+  
+  
+  --------------------------------------------------------------------------------------
 # ... and predict data on validation data-set
 prediction = predict(fit,validate, type = "response")
 
