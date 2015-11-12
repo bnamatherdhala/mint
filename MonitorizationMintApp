@@ -1,0 +1,44 @@
+
+1. We need more customer information for better advertising our Offers ...more customer profile information
+a) get the marketing information like emails data , customer ads data see the customer behaviour of those advertisiting 
+b) get the customer information like Age, sex , profession to make offers clustured based on there actions
+c) get the information of there current offers and more specific so that we can co relate those with the offers we can advertise
+
+
+2. get the financial predictors to make decisions with the offers .. how a predictor might increase the intuits revenue 
+or may decrease the revenue
+b) what offers are generating more revenue try to make them better as they constuite more revenue , by ranking the offers
+based on the clusrered customer profiles
+c) we need need to rank the offers based on the revenure they generate and also how popular those ads
+are and create that ranking algorithm based on above predictors  and  have the ads offered 
+
+3) Collect the A/B testing data , log data , cookie data 
+a) check whats  the size of the ads that are being placed
+b) content of the ads 
+c) fonts of the ads, colour of the ads that has high impressions and clicks
+
+
+
+4) get the most effective transactions data if possible  see what type of transactions they are
+for example: If a customer  if a freqent traveller based on his purchases of flight tickets/ car rentals/ hotels
+he has a high probability of choosing a offer which has more savings for flight rewards / car insurance/ hotels rewards
+than other cards
+If his transactions are mainly on education/ loans/ home/ groceries/ 
+just show those offerings as its high probability he will select those 
+b) Combine this predictors with the clicks/impressions to make our offerings more effective
+
+
+5) have customer specific options for the product ...work with product teams how to make mint the best place 
+to make your finances better
+make customer specific offerings like havce  general plan, targeted savings plan
+like for example i want next two months to make more savings on resturants / groceries/ education/ insurance --
+the app does that for that which shows those offerings that you need based on your request..
+In this case even based on my last few months clicks might be high for other offerings the next few months 
+i might be more intrested in my targted offerings.. the app must be automated in the algorithms to manage its offers
+
+
+
+
+
+
+

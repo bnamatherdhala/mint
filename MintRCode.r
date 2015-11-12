@@ -276,8 +276,7 @@ exp(coef(fit5))
 Call:
   roc.formula(formula = Event ~ prob, data = train2)
 
-Data: prob in 37392 controls (Event 0) < 2608 cases (Event 1).
-Area under the curve: 0.7464
+
 --------------------------------------------------------------------------
   ##Lets write a simple function to use LOOCV and 10 fold CV
   > loocv=function(fit){
