@@ -1,7 +1,8 @@
 
 1. We need more customer information for better advertising our Offers ...more customer profile information
 a) get the marketing information like emails data , customer ads data see the customer behaviour of those advertisiting 
-b) get the customer information like Age, sex , profession to make offers clustured based on there actions
+b) get the customer information like Age, sex , profession, household, credit Score to make offers clustured based on there actions
+c) get more information on spending based on each merchant like by merchant/by category/ by tag
 c) get more information about the merchnats and offers why users are using these offers and what offers are related to these 
 current offers-- more information about merchnants and there related offerid
 
@@ -17,6 +18,8 @@ are and create that ranking algorithm based on above predictors  and  have the a
 a) check whats  the size of the ads that are being placed
 b) content of the ads 
 c) fonts of the ads, colour of the ads that has high impressions and clicks
+d) get the clicks information of where the user in the app which actions are more clicked which ones are not
+
 
 
 
@@ -26,12 +29,15 @@ he has a high probability of choosing a offer which has more savings for flight 
 than other cards
 If his transactions are mainly on education/ loans/ home/ groceries/ 
 just show those offerings as its high probability he will select those 
+
+b)get the categorised transactions of the user to make the offerings effective
 b) Combine this predictors with the clicks/impressions to make our offerings more effective
 
 
 5) have customer specific options for the product ...work with product teams how to make mint the best place 
 to make your finances better
-make customer specific offerings like havce  general plan, targeted savings plan
+make customer specific offerings like havce  general plan, targeted savings plan-- like similar to the goals option 
+
 like for example i want next two months to make more savings on resturants / groceries/ education/ insurance --
 the app does that for that which shows those offerings that you need based on your request..
 In this case even based on my last few months clicks might be high for other offerings the next few months 
